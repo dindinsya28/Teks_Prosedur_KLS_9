@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produksi & Presentasi Teks Prosedur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+            place-items: center;
+        }
+        .slide-container {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lato', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px;
+            position: relative;
+            width: 1280px;
+        }
+        .slide-container::before {
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.05), transparent 50%);
+        }
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1, h2, h3 { color: #1e293b; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
+        p, li { color: #475569; font-family: 'Lato', sans-serif; font-size: 18px; line-height: 1.5; margin: 0; }
+        
+        .slide-title { font-size: 38px; font-weight: 700; margin-bottom: 30px; text-align: left; width: 100%; color: #0f172a; border-bottom: 3px solid #4f46e5; padding-bottom: 10px; }
+        .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+
+        /* Layouts */
+        .title-layout { text-align: center; }
+        .title-layout h1 { font-size: 56px; color: #0f172a; margin-bottom: 20px; line-height: 1.2; }
+        .title-layout .subtitle { font-size: 22px; color: #4f46e5; font-weight: 600; max-width: 900px; margin: 0 auto; }
+
+        .section-title-layout { text-align: center; }
+        .section-title-layout h2 { font-size: 50px; color: #1e293b; margin-bottom: 15px; }
+        .section-title-layout p { font-size: 20px; color: #64748b; max-width: 800px; margin: 0 auto; }
+        .section-title-layout hr { background-color: #4f46e5; border: none; height: 4px; margin: 25px auto; width: 80px; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; width: 100%; }
+        .two-column.tiled > div { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; padding: 30px; }
+
+        .tiled-content { display: flex; gap: 30px; justify-content: center; width: 100%; }
+        .tile { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; flex: 1; padding: 25px; text-align: left; }
+        .tile .icon { color: #4f46e5; font-size: 36px; margin-bottom: 15px; }
+        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; }
+
+        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
+        .bullet-list li { margin-bottom: 15px; padding-left: 35px; position: relative; }
+        .bullet-list i { color: #4f46e5; font-size: 20px; left: 0; position: absolute; top: 3px; }
+
+        .image-wrapper { border-radius: 10px; height: 320px; overflow: hidden; width: 100%; }
+        .image-wrapper img { height: 100%; object-fit: cover; width: 100%; }
+
+        /* Table */
+        .table-layout table { border-collapse: collapse; width: 100%; background: #f8fafc; border-radius: 8px; overflow: hidden; }
+        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; font-size: 16px; }
+        .table-layout th { background-color: #4f46e5; color: #ffffff; font-family: 'Poppins', sans-serif; }
+
+        /* Timeline */
+        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; align-items: stretch; height: 100%; }
+        .timeline-line { background-color: #e2e8f0; height: 4px; left: 0; position: absolute; top: 50%; transform: translateY(-2px); width: 100%; z-index: 0; }
+        .timeline-item { position: relative; text-align: center; width: 23%; }
+        .timeline-item::after { background-color: #fff; border-radius: 50%; border: 4px solid #4f46e5; content: ''; height: 20px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; z-index: 1; }
+        .timeline-item .content-wrapper { left: 0; position: absolute; width: 100%; padding: 0 10px; }
+        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 20px; }
+        .timeline-item:nth-child(even) .content-wrapper { margin-top: 20px; top: 50%; }
+        .timeline-item h3 { color: #4f46e5; font-size: 20px; margin-bottom: 8px; }
+
+        /* Quote & Q&A */
+        .quote-layout { text-align: center; width: 85%; margin: 0 auto; }
+        .quote-layout blockquote { color: #1e293b; font-size: 36px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 20px 0; }
+        .quote-layout cite { color: #4f46e5; font-size: 20px; font-style: normal; font-weight: 700; }
+
+        .qa-layout { text-align: center; width: 100%; }
+        .qa-layout h2 { font-size: 64px; color: #1e293b; margin-bottom: 15px; }
+        .qa-layout p { font-size: 22px; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <h1>Produksi & Presentasi<br>Karya Teks Prosedur</h1>
+        <p class="subtitle">Pertemuan 6: Elemen Menulis & Berbicara | Kurikulum Merdeka Bahasa Indonesia</p>
+    </div>
+</div>
+
+<!-- Slide 2: Section Title -->
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Pengantar & Tujuan Pembelajaran</h2>
+        <p>Tahap final: Menulis karya mandiri dan menyajikannya secara lisan dengan percaya diri.</p>
+    </div>
+</div>
+
+<!-- Slide 3: Two Column Tiled Text (Tujuan Pembelajaran) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Target & Capaian Akhir Pembelajaran</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Capaian Elemen Menulis</h3>
+                <p>Peserta didik mampu merancang dan memproduksi teks prosedur yang logis, sistematis, dan sesuai dengan struktur serta kaidah kebahasaan yang tepat sasaran.</p>
+            </div>
+            <div>
+                <h3>Capaian Elemen Berbicara</h3>
+                <p>Peserta didik mampu mempresentasikan, menginstruksikan, dan menyajikan teks prosedur secara lisan dengan intonasi, pelafalan, dan gestur yang komunikatif.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Section Title -->
+<div class="slide-container" id="slide4">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Fase 1: Proses Produksi (Menulis)</h2>
+        <p>Dari ide mentah menjadi draf instruksi yang terstruktur rapi.</p>
+    </div>
+</div>
+
+<!-- Slide 5: Tiled Text with Icons (Tahapan Penulisan 1) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Tahap Pra-Penulisan: Persiapan Draf</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <h3>1. Penentuan Topik</h3>
+                <p>Pilih aktivitas atau panduan yang dikuasai dan bermanfaat bagi audiens (misal: cara membuat karya daur ulang, cara login aplikasi).</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                <h3>2. Target Audiens</h3>
+                <p>Tentukan untuk siapa teks ini dibuat. Bahasa untuk anak-anak akan berbeda dengan panduan untuk orang dewasa atau profesional.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                <h3>3. Riset & Urutan</h3>
+                <p>Kumpulkan data, alat, dan bahan yang valid. Catat urutan kejadian secara kasar sebelum diperhalus menjadi kalimat imperatif.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Tiled Text with Icons (Tahapan Penulisan 2) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Tahap Drafting: Menyusun Struktur</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Bagian Tujuan</h3>
+                <p>Tuliskan paragraf pembuka yang menarik. Jelaskan apa hasil akhir yang akan dicapai pembaca jika mengikuti panduan ini.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
+                <h3>Alat & Bahan</h3>
+                <p>Rincikan kebutuhan secara spesifik, termasuk ukuran, takaran, atau spesifikasi teknis agar tidak terjadi kesalahan praktik.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-list-check"></i></div>
+                <h3>Langkah-langkah</h3>
+                <p>Gunakan penomoran. Awali dengan kata kerja imperatif (siapkan, potong, klik). Pastikan alurnya logis dan tidak melompat.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Section Title -->
+<div class="slide-container" id="slide7">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Fase 2: Strategi Presentasi Memukau</h2>
+        <p>Bagaimana membuat instruksi Anda didengar dan dipahami audiens.</p>
+    </div>
+</div>
+
+<!-- Slide 8: Styled Bullet Points (Kunci Presentasi Lisan) -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Kunci Kesuksesan Elemen Berbicara</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-microphone-lines"></i><strong>Vokal & Artikulasi:</strong> Ucapkan setiap kata kerja perintah dengan jelas. Jangan bergumam, pastikan volume suara terdengar hingga baris belakang kelas.</li>
+                <li><i class="fa-solid fa-eye"></i><strong>Kontak Mata (Eye Contact):</strong> Tatap audiens secara merata. Jangan terus-menerus membaca teks atau menunduk menatap layar proyektor.</li>
+                <li><i class="fa-solid fa-person-chalkboard"></i><strong>Bahasa Tubuh (Gestur):</strong> Gunakan tangan untuk mengilustrasikan ukuran, arah, atau penekanan pada langkah-langkah yang rumit (contoh: memutar, melipat).</li>
+                <li><i class="fa-solid fa-tachometer-alt"></i><strong>Tempo Berbicara:</strong> Berikan jeda setelah menjelaskan satu langkah penting. Beri waktu audiens untuk mencerna instruksi sebelum lanjut ke poin berikutnya.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Image Right Text Left (Studi Kasus Presentasi) -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">Studi Kasus: Kesalahan Umum Presentasi</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p><strong>Kesalahan Visual & Lisan:</strong></p>
+                <ul style="margin-top: 15px; padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Membaca Punggung:</strong> Presenter membelakangi audiens untuk membaca slide presentasi penuh teks.</li>
+                    <li><strong>Slide Terlalu Padat:</strong> Memasukkan seluruh paragraf draf ke dalam satu slide PowerPoint, bukan poin-poin utama (bullet points).</li>
+                    <li><strong>Monoton:</strong> Membaca instruksi seperti membaca berita datar, tanpa penekanan pada peringatan atau tips penting.</li>
+                </ul>
+            </div>
+            <div>
+                <div class="image-wrapper"><img src="https://placehold.co/600x350/f87171/7f1d1d?text=Kesalahan+Presentasi+Visual" alt="Kesalahan Presentasi"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Section Title -->
+<div class="slide-container" id="slide10">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Penilaian & Simulasi Kelas</h2>
+        <p>Kriteria penilaian untuk karya tulis dan performa lisan.</p>
+    </div>
+</div>
+
+<!-- Slide 11: Table (Rubrik Penilaian Presentasi & Karya) -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Rubrik Penilaian Presentasi (Penilaian Unjuk Kerja)</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspek Penilaian</th>
+                        <th>Kriteria Sangat Baik (Skor 4)</th>
+                        <th>Kriteria Perlu Bimbingan (Skor 1-2)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sistematika Penyampaian</strong></td>
+                        <td>Membuka, menyajikan langkah berurutan, dan menutup presentasi dengan sangat runtut.</td>
+                        <td>Langkah melompat, tidak ada salam pembuka atau penutup yang jelas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Penggunaan Bahasa lisan</strong></td>
+                        <td>Menggunakan kata kerja imperatif lisan dengan tepat, kosakata baku namun komunikatif.</td>
+                        <td>Terlalu banyak slang, kalimat terputus-putus, kata perintah tidak jelas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kepercayaan Diri & Gestur</strong></td>
+                        <td>Kontak mata merata, suara lantang, gestur tangan mendukung penjelasan instruksi.</td>
+                        <td>Menunduk membaca teks, suara tidak terdengar, tubuh kaku/gugup.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Media Pendukung (Opsional)</strong></td>
+                        <td>Alat peraga/slide sangat membantu audiens memvisualisasikan langkah abstrak.</td>
+                        <td>Media justru membingungkan atau rusak saat digunakan.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Timeline (Alur Eksekusi di Kelas) -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title">Alur Sesi Presentasi Hari Ini</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>1. Persiapan Akhir</h3>
+                    <p>10 Menit: Finalisasi naskah draf & penyiapan media presentasi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2. Undian Giliran</h3>
+                    <p>Menentukan urutan maju presentasi individu/kelompok secara acak.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>3. Unjuk Kerja</h3>
+                    <p>5-7 menit per siswa untuk menyampaikan teks prosedur di depan kelas.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>4. Umpan Balik</h3>
+                    <p>Evaluasi dari guru dan tanggapan dari audiens kelas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 13: Quote (Refleksi Pembelajaran) -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">Refleksi Akhir Materi</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>"Kemampuan menulis instruksi yang logis dan menyampaikannya secara meyakinkan adalah bukti bahwa tata pikir kita telah tersusun dengan rapi."</blockquote>
+            <cite>— Refleksi Elemen Menulis & Berbicara</cite>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Full Background Image (Rangkuman) -->
+<div class="slide-container" id="slide14" style="background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('https://placehold.co/1280x720/1e293b/ffffff?text=Penutup+Teks+Prosedur'); background-size: cover; background-position: center;">
+    <h2 class="slide-title">Penutupan Modul Teks Prosedur Kelas 9</h2>
+    <div class="content-area">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            <p>1. <strong>Siklus Lengkap:</strong> Kita telah mempelajari teks prosedur mulai dari konsep, identifikasi struktur, bedah kebahasaan, analisis kritis infografik, hingga produksi mandiri.</p>
+            <p>2. <strong>Keterampilan Hidup:</strong> Ilmu merancang dan mempresentasikan prosedur ini akan terus kalian gunakan, baik untuk membuat konten tutorial digital, maupun menyusun laporan teknis kelak.</p>
+            <p>3. <strong>Tahap Selanjutnya:</strong> Kumpulkan naskah final kepada guru sebagai portofolio akhir bab.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Q&A -->
+<div class="slide-container" id="slide15">
+    <div class="qa-layout">
+        <h2>Siap Untuk Presentasi?</h2>
+        <p>Mari tunjukkan hasil karya terbaik kalian.</p>
+        <div style="margin-top: 40px; color: #4f46e5; font-weight: 700; font-size: 20px;">
+            Semangat Belajar Bahasa Indonesia | Kurikulum Merdeka
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
