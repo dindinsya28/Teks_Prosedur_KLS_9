@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Kelompok: Fiction to Fact Factory + Lab Audit & Sandbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .app-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 950px;
+            overflow: hidden;
+            position: relative;
+        }
+        .header-app {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #d97706;
+        }
+        .header-app h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin: 0;
+        }
+        .content-body {
+            padding: 30px;
+            max-height: 82vh;
+            overflow-y: auto;
+        }
+        .intro-box {
+            text-align: center;
+            padding: 20px;
+        }
+        .intro-box h3 {
+            font-family: 'Poppins', sans-serif;
+            color: #1e293b;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .intro-box p {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            border-color: #d97706;
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .btn-primary {
+            background-color: #d97706;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #b45309;
+        }
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Game & Lab Screen */
+        .story-card {
+            background-color: #f8fafc;
+            border-left: 4px solid #d97706;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 25px;
+        }
+        .story-card h4 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+        }
+        .story-card p {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+            font-style: italic;
+        }
+        .task-instruction {
+            background-color: #fef3c7;
+            border: 1px solid #fde68a;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Feature 2: Audit Lab Styles */
+        .audit-word {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 2px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .audit-word.imperatif { background-color: #3b82f6 !important; color: white; font-weight: 600; }
+        .audit-word.verba { background-color: #10b981 !important; color: white; font-weight: 600; }
+        .audit-word.konjungsi { background-color: #f97316 !important; color: white; font-weight: 600; }
+
+        /* Feature 3: Sandbox Recipe Testing Styles */
+        .sandbox-slot {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #334155;
+        }
+        .sandbox-slot:hover { border-color: #0284c7; background: #e0f2fe; }
+
+        /* Result Screen */
+        .result-card {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .result-card h3 {
+            color: #166534;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header-app">
+        <h2><i class="fa-solid fa-industry"></i> Fiction to Fact Factory (Pabrik Konversi & Lab Uji)</h2>
+        <span id="groupBadge" style="font-size: 14px; font-weight: 600; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px;">Mode Kelompok</span>
+    </div>
+    
+    <div class="content-body">
+        <!-- SETUP SCREEN -->
+        <div id="setupView" class="intro-box">
+            <h3>Selamat Datang di Pabrik Konversi Teks!</h3>
+            <p>Pilih misi kelompok Anda untuk mendekonstruksi cerpen fiksi menjadi teks prosedur, melakukan audit kebahasaan, hingga menguji logika resep secara virtual di Sandbox!</p>
+            
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="form-group">
+                    <label for="groupName">Nama Kelompok</label>
+                    <input type="text" id="groupName" class="form-control" placeholder="Contoh: Kelompok 1 - Rajawali">
+                </div>
+                <button onclick="startMission()" class="btn-primary" style="width: 100%;">Ambil Tantangan Cerpen Secara Acak</button>
+            </div>
+        </div>
+
+        <!-- WORKSPACE SCREEN (Main Mission) -->
+        <div id="workspaceView" class="hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 id="displayGroupName" style="margin: 0; color: #1e293b; font-family: 'Poppins', sans-serif;">Kelompok: -</h3>
+                <span id="challengeCode" style="background: #e2e8f0; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; color: #475569;">Kode Misi: #01</span>
+            </div>
+            
+            <div class="story-card">
+                <h4 id="storyTitle"><i class="fa-solid fa-book-open"></i> Judul Cerpen Fiktif</h4>
+                <p id="storyText">Teks cerpen akan dimuat di sini...</p>
+            </div>
+            
+            <div class="task-instruction">
+                <i class="fa-solid fa-circle-exclamation"></i> <span id="taskPromptText">Instruksi konversi khusus untuk kelompok ini...</span>
+            </div>
+
+            <!-- Lembar Kerja Konversi -->
+            <div style="border-top: 2px dashed #e2e8f0; padding-top: 20px; margin-bottom: 25px;">
+                <h4 style="font-family: 'Poppins', sans-serif; color: #1e293b; margin-bottom: 15px;"><i class="fa-solid fa-file-pen"></i> Lembar Kerja Konversi Teks Prosedur</h4>
+                
+                <div class="form-group">
+                    <label for="inputJudul">1. Judul Teks Prosedur Baru (Objektif & Lugas)</label>
+                    <input type="text" id="inputJudul" class="form-control" placeholder="Contoh: Cara Membuat Ramuan Tradisional...">
+                </div>
+                <div class="form-group">
+                    <label for="inputBahan">2. Rincian Alat & Bahan / Prasyarat</label>
+                    <textarea id="inputBahan" class="form-control" placeholder="Tuliskan daftar alat dan bahan secara rinci berdasarkan petikan cerpen..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputLangkah">3. Langkah-Langkah Kerja (Gunakan Kalimat Imperatif / Perintah)</label>
+                    <textarea id="inputLangkah" class="form-control" placeholder="1. Siapkan...&#10;2. Tumbuklah...&#10;3. Seduhlah..."></textarea>
+                </div>
+                <button onclick="goToAuditLab()" class="btn-primary" style="width: 100%; margin-top: 10px;"><i class="fa-solid fa-arrow-right"></i> Lanjut ke Lab Audit Kebahasaan (Fitur 2)</button>
+            </div>
+        </div>
+
+        <!-- FEATURE 2: AUDIT LAB SCREEN -->
+        <div id="auditView" class="hidden">
+            <h3 style="font-family: 'Poppins', sans-serif; color: #1e293b; margin-bottom: 10px;"><i class="fa-solid fa-magnifying-glass-chart"></i> Lab 2: Detektif Imperatif & Verba (Audit Bahasa)</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">
+                Klik kata di bawah ini sesuai aturan audit: <br>
+                🔵 <b>1 Klik</b> = Kalimat/Kata Perintah (Imperatif) | 🟢 <b>2 Klik</b> = Verba Material (Tindakan) | 🟠 <b>3 Klik</b> = Konjungsi Temporal.
+            </p>
+            
+            <div id="auditContainer" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 20px; border-radius: 8px; line-height: 2.2; margin-bottom: 20px; font-size: 16px;">
+                <!-- Teks Interaktif Audit akan dirender lewat JS -->
+            </div>
+
+            <button onclick="goToSandbox()" class="btn-primary" style="width: 100%;"><i class="fa-solid fa-flask"></i> Lanjut ke Simulasi Sandbox Resep (Fitur 3)</button>
+        </div>
+
+        <!-- FEATURE 3: SANDBOX RECIPE TESTING SCREEN -->
+        <div id="sandboxView" class="hidden">
+            <h3 style="font-family: 'Poppins', sans-serif; color: #1e293b; margin-bottom: 10px;"><i class="fa-solid fa-gamepad"></i> Lab 3: Simulasi Uji Coba Resep (Sandbox Logika)</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">
+                Susun urutan langkah kerja secara logis dengan mengeklik slot di bawah ini sesuai urutan eksekusi yang benar agar resep tidak gagal/gosong!
+            </p>
+
+            <div style="margin-bottom: 15px; font-weight: 700; color: #1e293b;">Urutan Langkah Kerja Virtual:</div>
+            <div id="sandboxSlotsContainer">
+                <!-- Slot interaktif disusun lewat JS -->
+            </div>
+
+            <button onclick="submitMission()" class="btn-primary" style="width: 100%; margin-top: 15px;"><i class="fa-solid fa-check-circle"></i> Selesaikan Misi & Evaluasi Total</button>
+        </div>
+
+        <!-- SUCCESS / REVIEW SCREEN -->
+        <div id="resultView" class="hidden">
+            <div class="result-card">
+                <h3><i class="fa-solid fa-circle-check"></i> Seluruh Misi Konversi & Lab Selesai!</h3>
+                <p id="resultMeta" style="font-weight: 600; color: #334155; margin-bottom: 15px;"></p>
+                
+                <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #d1fae5; margin-bottom: 20px;">
+                    <h4 id="resTitle" style="margin-top: 0; color: #1e293b;"></h4>
+                    <p style="margin: 5px 0; font-size: 14px;"><strong>Alat & Bahan:</strong><br><span id="resBahan" style="white-space: pre-line; color: #475569;"></span></p>
+                    <p style="margin: 10px 0 0 0; font-size: 14px;"><strong>Langkah Imperatif:</strong><br><span id="resLangkah" style="white-space: pre-line; color: #475569;"></span></p>
+                    <p style="margin: 10px 0 0 0; font-size: 14px; color: #166534;"><strong>Status Lab Audit & Sandbox:</strong> <i class="fa-solid fa-shield-check"></i> Berhasil Diaudit & Teruji Logikanya!</p>
+                </div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <button onclick="window.print()" class="btn-primary" style="flex: 1; background-color: #0284c7;"><i class="fa-solid fa-print"></i> Cetak / Simpan PDF Laporan</button>
+                    <button onclick="location.reload()" class="btn-secondary">Mulai Misi Baru</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cerpenDatabase = [
+        {
+            code: "MISI-01",
+            title: "Kisah Kakek dan Ramuan Daun Sirih",
+            story: "Kakek tersenyum hangat sambil berjalan perlahan menuju halaman belakang rumah yang rimbun. Dengan penuh ketelitian, ia memetik tiga lembar daun sirih yang tua dan segar. Setelah itu, ia mengambil segenggam beras merah dari dalam toples dapur. Kakek mulai meletakkan daun sirih dan beras merah tersebut ke dalam sebuah lesung batu kecil warisan leluhurnya. Dengan tangan rentanya, ia menumbuk kedua bahan itu secara bersamaan hingga benar-benar halus merata. Rautan wajahnya menunjukkan kesungguhan sebelum akhirnya ia menyeduh hasil tumbukan tersebut dengan sedikit air hangat kuman di dalam cangkir porselen.",
+            task: "Tugas Kelompok: Ubah petikan narasi fiksi di atas menjadi teks prosedur formal. Ekstrak alat/bahan secara rinci dan ubah tindakan kakek menjadi kalimat imperatif yang tegas.",
+            auditText: "Petiklah tiga lembar daun sirih. Kemudian, ambillah segenggam beras merah. Masukkan bahan ke lesung dan tumbuklah hingga halus. Setelah itu, seduhlah dengan air hangat.",
+            sandboxSteps: [
+                "Masukkan daun sirih dan beras merah ke dalam lesung batu",
+                "Tumbuklah kedua bahan tersebut secara bersamaan hingga halus merata",
+                "Seduhlah hasil tumbukan ramuan ke dalam cangkir porselen dengan air hangat"
+            ]
+        },
+        {
+            code: "MISI-02",
+            title: "Bibi dan Rahasia Kue Lupis Tradisional",
+            story: "Pagi-pagi sekali sibuklah Bibi di dapur tua beraroma daun pandan. Ia merendam beras ketan putih pilihan selama tiga jam penuh agar teksturnya menjadi empuk sempurna. Sembari menunggu, Bibi merebus gula jawa asli bersama selembar daun pandan dan sedikit air hingga mencair kental menjadi kinca yang harum. Beras ketan yang sudah direndam lalu dibungkus rapat berbentuk segitiga menggunakan daun pisang segar yang telah dilayukan di atas api kecil agar tidak mudah robek. Bungkus-bungkus segitiga itu kemudian dimasukkan ke dalam panci besar berisi air mendidih dan direbus selama dua jam penuh. Hidangan kue lupis siap disajikan bersama taburan kelapa parut gurih.",
+            task: "Tugas Kelompok: Dekonstruksi cerita pembuatan kue lupis ini. Buat daftar bahan beserta takaran tersirat, lalu susun langkah memasak menggunakan konjungsi temporal dan verba material.",
+            auditText: "Rendamlah beras ketan putih. Selanjutnya, rebuslah gula jawa bersama daun pandan. Bungkuslah ketan menggunakan daun pisang. Kemudian, rebuslah bungkusan tersebut dalam air mendidih.",
+            sandboxSteps: [
+                "Rendamlah beras ketan putih pilihan selama tiga jam penuh",
+                "Rebuslah gula jawa bersama daun pandan hingga mencair menjadi kinca",
+                "Bungkuslah beras ketan berbentuk segitiga dengan daun pisang segar",
+                "Masukkan bungkusan ke panci berisi air mendidih dan rebus selama dua jam"
+            ]
+        }
+    ];
+
+    let activeChallenge = null;
+    let groupInfo = "";
+
+    function startMission() {
+        const nameInput = document.getElementById('groupName').value.trim();
+        if (!nameInput) {
+            alert('Mohon masukkan nama kelompok terlebih dahulu!');
+            return;
+        }
+        groupInfo = nameInput;
+        const randomIndex = Math.floor(Math.random() * cerpenDatabase.length);
+        activeChallenge = cerpenDatabase[randomIndex];
+
+        document.getElementById('displayGroupName').innerText = `Kelompok: ${groupInfo}`;
+        document.getElementById('challengeCode').innerText = `Kode Misi: ${activeChallenge.code}`;
+        document.getElementById('storyTitle').innerHTML = `<i class="fa-solid fa-book-open"></i> ${activeChallenge.title}`;
+        document.getElementById('storyText').innerText = activeChallenge.story;
+        document.getElementById('taskPromptText').innerText = activeChallenge.task;
+
+        document.getElementById('setupView').classList.add('hidden');
+        document.getElementById('workspaceView').classList.remove('hidden');
+    }
+
+    function goToAuditLab() {
+        const judul = document.getElementById('inputJudul').value.trim();
+        const bahan = document.getElementById('inputBahan').value.trim();
+        const langkah = document.getElementById('inputLangkah').value.trim();
+        if (!judul || !bahan || !langkah) {
+            alert('Mohon lengkapi seluruh kolom lembar kerja terlebih dahulu!');
+            return;
+        }
+
+        // Render Audit Text words
+        const container = document.getElementById('auditContainer');
+        container.innerHTML = "";
+        const words = activeChallenge.auditText.split(" ");
+        words.forEach(w => {
+            const span = document.createElement('span');
+            span.className = 'audit-word';
+            span.innerText = w;
+            let clickCount = 0;
+            span.onclick = function() {
+                clickCount = (clickCount + 1) % 4;
+                span.classList.remove('imperatif', 'verba', 'konjungsi');
+                if(clickCount === 1) span.classList.add('imperatif');
+                else if(clickCount === 2) span.classList.add('verba');
+                else if(clickCount === 3) span.classList.add('konjungsi');
+            };
+            container.appendChild(span);
+            container.appendChild(document.createTextNode(" "));
+        });
+
+        document.getElementById('workspaceView').classList.add('hidden');
+        document.getElementById('auditView').classList.remove('hidden');
+    }
+
+    function goToSandbox() {
+        const slotContainer = document.getElementById('sandboxSlotsContainer');
+        slotContainer.innerHTML = "";
+        
+        // Acak urutan langkah sandbox untuk diuji siswa
+        let shuffledSteps = [...activeChallenge.sandboxSteps].sort(() => Math.random() - 0.5);
+        
+        shuffledSteps.forEach((step, idx) => {
+            const div = document.createElement('div');
+            div.className = 'sandbox-slot';
+            div.innerHTML = `<span>Langkah ${idx+1}: ${step}</span> <i class="fa-solid fa-arrows-up-down"></i>`;
+            slotContainer.appendChild(div);
+        });
+
+        document.getElementById('auditView').classList.add('hidden');
+        document.getElementById('sandboxView').classList.remove('hidden');
+    }
+
+    function submitMission() {
+        document.getElementById('resultMeta').innerText = `Kelompok: ${groupInfo} | Misi: ${activeChallenge.title} (${activeChallenge.code})`;
+        document.getElementById('resTitle').innerText = document.getElementById('inputJudul').value;
+        document.getElementById('resBahan').innerText = document.getElementById('inputBahan').value;
+        document.getElementById('resLangkah').innerText = document.getElementById('inputLangkah').value;
+        
+        document.getElementById('sandboxView').classList.add('hidden');
+        document.getElementById('resultView').classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menganalisis Arahan & Informasi Penting dari Teks Prosedur (Infografik)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+            place-items: center;
+        }
+        .slide-container {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lato', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px;
+            position: relative;
+            width: 1280px;
+        }
+        .slide-container::before {
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.05), transparent 50%);
+        }
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1, h2, h3 { color: #1e293b; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
+        p, li { color: #475569; font-family: 'Lato', sans-serif; font-size: 18px; line-height: 1.5; margin: 0; }
+        
+        .slide-title { font-size: 38px; font-weight: 700; margin-bottom: 30px; text-align: left; width: 100%; color: #0f172a; border-bottom: 3px solid #4f46e5; padding-bottom: 10px; }
+        .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+
+        /* Layouts */
+        .title-layout { text-align: center; }
+        .title-layout h1 { font-size: 56px; color: #0f172a; margin-bottom: 20px; line-height: 1.2; }
+        .title-layout .subtitle { font-size: 22px; color: #4f46e5; font-weight: 600; max-width: 900px; margin: 0 auto; }
+
+        .section-title-layout { text-align: center; }
+        .section-title-layout h2 { font-size: 50px; color: #1e293b; margin-bottom: 15px; }
+        .section-title-layout p { font-size: 20px; color: #64748b; max-width: 800px; margin: 0 auto; }
+        .section-title-layout hr { background-color: #4f46e5; border: none; height: 4px; margin: 25px auto; width: 80px; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; width: 100%; }
+        .two-column.tiled > div { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; padding: 30px; }
+
+        .tiled-content { display: flex; gap: 30px; justify-content: center; width: 100%; }
+        .tile { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; flex: 1; padding: 25px; text-align: left; }
+        .tile .icon { color: #4f46e5; font-size: 36px; margin-bottom: 15px; }
+        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; }
+
+        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
+        .bullet-list li { margin-bottom: 15px; padding-left: 35px; position: relative; }
+        .bullet-list i { color: #4f46e5; font-size: 20px; left: 0; position: absolute; top: 3px; }
+
+        .image-wrapper { border-radius: 10px; height: 320px; overflow: hidden; width: 100%; }
+        .image-wrapper img { height: 100%; object-fit: cover; width: 100%; }
+
+        /* Table */
+        .table-layout table { border-collapse: collapse; width: 100%; background: #f8fafc; border-radius: 8px; overflow: hidden; }
+        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; font-size: 16px; }
+        .table-layout th { background-color: #4f46e5; color: #ffffff; font-family: 'Poppins', sans-serif; }
+
+        /* Timeline */
+        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; align-items: stretch; height: 100%; }
+        .timeline-line { background-color: #e2e8f0; height: 4px; left: 0; position: absolute; top: 50%; transform: translateY(-2px); width: 100%; z-index: 0; }
+        .timeline-item { position: relative; text-align: center; width: 23%; }
+        .timeline-item::after { background-color: #fff; border-radius: 50%; border: 4px solid #4f46e5; content: ''; height: 20px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; z-index: 1; }
+        .timeline-item .content-wrapper { left: 0; position: absolute; width: 100%; padding: 0 10px; }
+        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 20px; }
+        .timeline-item:nth-child(even) .content-wrapper { margin-top: 20px; top: 50%; }
+        .timeline-item h3 { color: #4f46e5; font-size: 20px; margin-bottom: 8px; }
+
+        /* Quote & Q&A */
+        .quote-layout { text-align: center; width: 85%; margin: 0 auto; }
+        .quote-layout blockquote { color: #1e293b; font-size: 36px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 20px 0; }
+        .quote-layout cite { color: #4f46e5; font-size: 20px; font-style: normal; font-weight: 700; }
+
+        .qa-layout { text-align: center; width: 100%; }
+        .qa-layout h2 { font-size: 64px; color: #1e293b; margin-bottom: 15px; }
+        .qa-layout p { font-size: 22px; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <h1>Menganalisis Arahan & Informasi Penting<br>dari Teks Prosedur (Infografik)</h1>
+        <p class="subtitle">Pertemuan 1: Elemen Menyimak | Kurikulum Merdeka Bahasa Indonesia</p>
+    </div>
+</div>
+
+<!-- Slide 2: Section Title -->
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Pengantar & Tujuan Pembelajaran</h2>
+        <p>Memahami kompetensi dasar menyimak kritis teks multimodal berbentuk infografik prosedural.</p>
+    </div>
+</div>
+
+<!-- Slide 3: Two Column Tiled Text (Tujuan Pembelajaran) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Target & Capaian Pembelajaran Hari Ini</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Capaian Elemen Menyimak</h3>
+                <p>Peserta didik mampu menganalisis, mengevaluasi, dan memaknai informasi berupa arahan, instruksi, atau pesan dari berbagai jenis teks multimodal (audiovisual & infografik) secara kritis.</p>
+            </div>
+            <div>
+                <h3>Tujuan Spesifik Pertemuan 1</h3>
+                <p>1. Memahami pergeseran teks prosedur konvensional ke infografik digital.<br>2. Mengidentifikasi karakteristik visual dan kebahasaan.<br>3. Mengekstraksi poin arahan kunci secara runtut.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Two Column Tiled Text (Hakikat Teks Prosedur Modern) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Hakikat Teks Prosedur Modern</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Apa itu Teks Prosedur?</h3>
+                <p>Teks yang berisi panduan, tahapan, atau langkah-langkah sistematis yang harus ditempuh untuk mencapai suatu tujuan atau menyelesaikan aktivitas tertentu secara tepat.</p>
+            </div>
+            <div>
+                <h3>Revolusi ke Format Digital</h3>
+                <p>Di era digital, teks prosedur bertransformasi menjadi <strong>infografik</strong>. Penggunaan elemen grafis, warna, dan tata letak dinamis membuat instruksi lebih cepat dipahami dalam hitungan detik.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Section Title -->
+<div class="slide-container" id="slide5">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Karakteristik Visual Infografik Prosedur</h2>
+        <p>Meneliti bagaimana elemen visual memandu pembaca secara intuitif.</p>
+    </div>
+</div>
+
+<!-- Slide 6: Tiled Text with Icons (Komponen Visual 1) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Karakteristik Visual: Ikon & Simbol</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-icons"></i></div>
+                <h3>Visualisasi Konsep</h3>
+                <p>Ikon menggantikan teks panjang dengan simbol universal yang langsung dimengerti tanpa hambatan bahasa.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Fokus Perhatian</h3>
+                <p>Mengarahkan pandangan audiens pada objek atau fitur utama yang harus diakses dalam sistem layanan publik.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Efisiensi Informasi</h3>
+                <p>Meningkatkan kecepatan pemahaman kognitif pembaca hingga 60% dibandingkan teks paragraf penuh.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Tiled Text with Icons (Komponen Visual 2) -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Karakteristik Visual: Alur & Penanda Urutan</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+                <h3>Panah Kronologis</h3>
+                <p>Menunjukkan arah alur langkah (dari tahap 1 ke tahap berikutnya) agar pembaca tidak tersesat dalam urutan.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-list-ol"></i></div>
+                <h3>Nomor Berurutan</h3>
+                <p>Memberikan kepastian hierarki pengerjaan tugas secara logis, sistematis, dan terukur.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-route"></i></div>
+                <h3>Percabangan Logika</h3>
+                <p>Menyajikan opsi kondisional (misal: "Jika gagal, ulangi langkah 2" atau "Lanjut ke verifikasi email").</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Tiled Text with Icons (Komponen Visual 3) -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Karakteristik Visual: Warna & Ringkasan Imperatif</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>Color Coding (Warna Penanda)</h3>
+                <p>Membedakan tahapan penting, tombol aksi (CTA), dan peringatan kesalahan menggunakan kontras warna.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+                <h3>Teks Imperatif Padat</h3>
+                <p>Menggunakan kalimat perintah langsung yang ringkas tanpa mengurangi kejelasan esensi instruksi.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h3>Kotak Peringatan (Warning)</h3>
+                <p>Menandai area krusial yang sering menjadi titik kesalahan pengguna saat melakukan pendaftaran.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Section Title -->
+<div class="slide-container" id="slide9">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Teknik Menyimak & Mengekstraksi Arahan Kunci</h2>
+        <p>Strategi menyerap informasi audio-visual secara aktif dan kritis.</p>
+    </div>
+</div>
+
+<!-- Slide 10: Styled Bullet Points (Strategi Menyimak Kritis) -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">Strategi Menyimak Kritis & Multimodal</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-circle-check"></i><strong>Memirsa Menyeluruh:</strong> Amati keseluruhan struktur infografik sebelum mendengarkan penjelasan audio atau narasi pendukung.</li>
+                <li><i class="fa-solid fa-arrow-right"></i><strong>Mencatat Kata Kunci:</strong> Tangkap kata kerja imperatif (klik, unduh, masukkan, verifikasi) dan penanda urutan (pertama, selanjutnya, terakhir).</li>
+                <li><i class="fa-solid fa-star"></i><strong>Memetakan Relasi Visual:</strong> Hubungkan antara ikon visual yang muncul dengan instruksi verbal yang disampaikan narator.</li>
+                <li><i class="fa-solid fa-thumbtack"></i><strong>Evaluasi Kejelasan:</strong> Pertanyakan apakah infografik tersebut memiliki langkah yang melompat atau sudah runtut.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Two Column (Kaidah Kebahasaan) -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Kaidah Kebahasaan: Imperatif & Temporal</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Kata Kerja Imperatif (Perintah)</h3>
+                <p>Kalimat yang mengandung makna meminta atau memerintah orang lain untuk melakukan sesuatu. Ciri khas: akhiran <em>-kan</em>, <em>-i</em>, atau partikel <em>-lah</em>.<br><em>Contoh: Unggahlah, Daftarkan, Masukkan.</em></p>
+            </div>
+            <div>
+                <h3>Konjungsi & Penanda Temporal</h3>
+                <p>Kata hubung yang menandai urutan waktu atau tahapan kerja agar pembaca mengetahui kapan suatu aksi harus dilakukan.<br><em>Contoh: Pertama, kemudian, selanjutnya, setelah itu, terakhir.</em></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Section Title -->
+<div class="slide-container" id="slide12">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Ilustrasi & Aktivitas Pembelajaran</h2>
+        <p>Penerapan langsung menyimak infografik pendaftaran layanan publik & perpustakaan.</p>
+    </div>
+</div>
+
+<!-- Slide 13: Image Right Text Left (Studi Kasus Infografik) -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">Studi Kasus: Pendaftaran Akun Layanan Publik</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p><strong>Aktivitas Memirsa Bersama:</strong><br>Siswa menyimak penayangan infografik digital tata cara pendaftaran akun layanan publik nasional atau aplikasi perpustakaan daerah.</p>
+                <p><strong>Tugas Mini Individu:</strong><br>1. Catat 5 kata kerja imperatif utama yang muncul.<br>2. Identifikasi dokumen apa saja yang wajib disiapkan pada langkah awal.<br>3. Perhatikan bagaimana warna tombol konfirmasi memandu mata Anda.</p>
+            </div>
+            <div>
+                <div class="image-wrapper"><img src="https://placehold.co/600x350/c7d2fe/3730a3?text=Infografik+Prosedur" alt="Infografik Prosedur Layanan Publik"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Bar Chart Comparison (Analisis Akibat Langkah Terlewat) -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">Analisis Urutan: Akibat Langkah Terlewat</h2>
+    <div class="content-area">
+        <div style="display:flex; gap:30px; align-items:center; width:100%;">
+            <div style="flex:1;">
+                <p><strong>Diskusi Kritis:</strong> Apa akibatnya jika ada satu langkah di tengah infografik yang terlewat?</p>
+                <p>Data simulasi tingkat kegagalan sistem pendaftaran akibat kesalahan prosedur:</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li><strong>Langkah Verifikasi Email Terlewat:</strong> Akun gagal diaktifkan (85%).</li>
+                    <li><strong>Format Dokumen Salah:</strong> Ditolak sistem otomatis (65%).</li>
+                    <li><strong>Urutan Pengisian NIK Terbalik:</strong> Data invalid (40%).</li>
+                </ul>
+            </div>
+            <div style="flex:1;">
+                <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                    <div style="background:#f1f5f9; padding: 15px; border-radius: 8px;">
+                        <strong>Pentingnya Kepatuhan Prosedur:</strong> Prosedur digital bersifat mutlak dan sistematis. Satu kesalahan kecil atau langkah terlewat mengakibatkan seluruh proses harus diulang dari awal.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Timeline (Tahapan Simulasi Menyimak) -->
+<div class="slide-container" id="slide15">
+    <h2 class="slide-title">Tahapan Simulasi Menyimak Infografik</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>1. Observasi Awal</h3>
+                    <p>Melihat judul & tujuan utama infografik dalam 10 detik pertama.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2. Penyimakan Aktif</h3>
+                    <p>Mendengarkan penjelasan narator / membaca alur panah secara kronologis.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>3. Ekstraksi Poin</h3>
+                    <p>Mencatat perintah kunci, syarat dokumen, dan tombol aksi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>4. Re-konstruksi</h3>
+                    <p>Menuliskan kembali alur instruksi dalam poin ringkas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 16: Section Title -->
+<div class="slide-container" id="slide16">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Penugasan Terstruktur per Kelompok</h2>
+        <p>Kolaborasi menganalisis infografik prosedur digital dan konsekuensinya.</p>
+    </div>
+</div>
+
+<!-- Slide 17: Table (Rubrik Tugas Kelompok) -->
+<div class="slide-container" id="slide17">
+    <h2 class="slide-title">Lembar Kerja Kelompok (LKPD 1)</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspek Analisis Infografik</th>
+                        <th>Pertanyaan Panduan Kelompok</th>
+                        <th>Output / Hasil Tugas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Identifikasi Tujuan</strong></td>
+                        <td>Apa layanan atau produk yang dipandu dalam infografik tersebut?</td>
+                        <td>Pernyataan tujuan ringkas (1 kalimat).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ekstraksi Alur Utama</strong></td>
+                        <td>Apa saja langkah-langkah krusial yang ditunjukkan oleh panah kronologis?</td>
+                        <td>Daftar poin instruksi berurutan (5-7 langkah).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analisis Kaidah Bahasa</strong></td>
+                        <td>Temukan minimal 3 kata kerja imperatif dan konjungsi temporal.</td>
+                        <td>Tabel klasifikasi kata kerja & penanda urutan.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evaluasi Konsekuensi</strong></td>
+                        <td>Apa akibat fatal jika langkah nomor 3 (misal: verifikasi nomor HP) terlewat?</td>
+                        <td>Analisis risiko & solusi pencegahan kesalahan.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 18: Quote (Refleksi Pembelajaran) -->
+<div class="slide-container" id="slide18">
+    <h2 class="slide-title">Refleksi Pembelajaran Kritis</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>"Ketelitian dalam menyimak arahan dan membaca alur prosedur adalah kunci utama keberhasilan di era digital yang serba cepat."</blockquote>
+            <cite>— Refleksi Elemen Menyimak Bahasa Indonesia</cite>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 19: Full Background Image (Rangkuman) -->
+<div class="slide-container" id="slide19" style="background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('https://placehold.co/1280x720/1e293b/ffffff?text=Kesimpulan+Pertemuan+1'); background-size: cover; background-position: center;">
+    <h2 class="slide-title">Rangkuman Kunci & Persiapan Berikutnya</h2>
+    <div class="content-area">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            <p>1. <strong>Teks Prosedur Infografik</strong> memadukan visual (ikon, panah, warna) dan teks imperatif ringkas agar mudah disimak.</p>
+            <p>2. <strong>Teknik Menyimak Kritis</strong> menuntut siswa mencatat kata kunci dan memahami hubungan antar-langkah secara logis.</p>
+            <p>3. <strong>Pertemuan Berikutnya:</strong> Setiap kelompok akan mempresentasikan hasil analisis LKPD 1 dan melakukan simulasi lisan instruksi prosedur.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 20: Q&A -->
+<div class="slide-container" id="slide20">
+    <div class="qa-layout">
+        <h2>Pertanyaan & Diskusi?</h2>
+        <p>Terima kasih atas partisipasi aktif kalian dalam menyimak pembelajaran hari ini.</p>
+        <div style="margin-top: 40px; color: #4f46e5; font-weight: 700; font-size: 20px;">
+            Semangat Belajar Bahasa Indonesia | Kurikulum Merdeka
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+```eof
+
+Your slide deck on Menganalisis Arahan & Informasi Penting dari Teks Prosedur (Infografik) is ready! Feel free to take a look and let me know if you'd like to make any edits.

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menulis Teks Prosedur: Poster & Esai Prosedural</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+            place-items: center;
+        }
+        .slide-container {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lato', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px;
+            position: relative;
+            width: 1280px;
+        }
+        .slide-container::before {
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.05), transparent 50%);
+        }
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1, h2, h3 { color: #1e293b; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
+        p, li { color: #475569; font-family: 'Lato', sans-serif; font-size: 18px; line-height: 1.5; margin: 0; }
+        
+        .slide-title { font-size: 38px; font-weight: 700; margin-bottom: 30px; text-align: left; width: 100%; color: #0f172a; border-bottom: 3px solid #7c3aed; padding-bottom: 10px; }
+        .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+
+        /* Layouts */
+        .title-layout { text-align: center; }
+        .title-layout h1 { font-size: 50px; color: #0f172a; margin-bottom: 20px; line-height: 1.2; }
+        .title-layout .subtitle { font-size: 22px; color: #7c3aed; font-weight: 600; max-width: 900px; margin: 0 auto; }
+
+        .section-title-layout { text-align: center; }
+        .section-title-layout h2 { font-size: 50px; color: #1e293b; margin-bottom: 15px; }
+        .section-title-layout p { font-size: 20px; color: #64748b; max-width: 800px; margin: 0 auto; }
+        .section-title-layout hr { background-color: #7c3aed; border: none; height: 4px; margin: 25px auto; width: 80px; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; width: 100%; }
+        .two-column.tiled > div { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; padding: 30px; }
+
+        .tiled-content { display: flex; gap: 30px; justify-content: center; width: 100%; }
+        .tile { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; flex: 1; padding: 25px; text-align: left; }
+        .tile .icon { color: #7c3aed; font-size: 36px; margin-bottom: 15px; }
+        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; }
+
+        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
+        .bullet-list li { margin-bottom: 15px; padding-left: 35px; position: relative; }
+        .bullet-list i { color: #7c3aed; font-size: 20px; left: 0; position: absolute; top: 3px; }
+
+        /* Table */
+        .table-layout table { border-collapse: collapse; width: 100%; background: #f8fafc; border-radius: 8px; overflow: hidden; }
+        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; font-size: 16px; }
+        .table-layout th { background-color: #7c3aed; color: #ffffff; font-family: 'Poppins', sans-serif; }
+
+        /* Timeline */
+        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; align-items: stretch; height: 100%; }
+        .timeline-line { background-color: #e2e8f0; height: 4px; left: 0; position: absolute; top: 50%; transform: translateY(-2px); width: 100%; z-index: 0; }
+        .timeline-item { position: relative; text-align: center; width: 23%; }
+        .timeline-item::after { background-color: #fff; border-radius: 50%; border: 4px solid #7c3aed; content: ''; height: 20px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; z-index: 1; }
+        .timeline-item .content-wrapper { left: 0; position: absolute; width: 100%; padding: 0 10px; }
+        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 20px; }
+        .timeline-item:nth-child(even) .content-wrapper { margin-top: 20px; top: 50%; }
+        .timeline-item h3 { color: #7c3aed; font-size: 20px; margin-bottom: 8px; }
+
+        /* Quote & Q&A */
+        .quote-layout { text-align: center; width: 85%; margin: 0 auto; }
+        .quote-layout blockquote { color: #1e293b; font-size: 36px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 20px 0; }
+        .quote-layout cite { color: #7c3aed; font-size: 20px; font-style: normal; font-weight: 700; }
+
+        .qa-layout { text-align: center; width: 100%; }
+        .qa-layout h2 { font-size: 64px; color: #1e293b; margin-bottom: 15px; }
+        .qa-layout p { font-size: 22px; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <h1>Menulis Teks Prosedur:<br>Poster & Esai Prosedural</h1>
+        <p class="subtitle">Pertemuan 4: Elemen Menulis (Bagian 1) | Kurikulum Merdeka Bahasa Indonesia</p>
+    </div>
+</div>
+
+<!-- Slide 2: Section Title -->
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Pengantar & Fokus Pembelajaran</h2>
+        <p>Menuangkan gagasan instruksional secara kreatif ke dalam format visual (poster) dan naratif (esai).</p>
+    </div>
+</div>
+
+<!-- Slide 3: Two Column Tiled Text (Tujuan Pembelajaran) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Capaian & Tujuan Pembelajaran 4</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Capaian Elemen Menulis</h3>
+                <p>Peserta didik mampu menulis gagasan dan instruksi secara kreatif dan sistematis dalam beragam media multimodal, baik visual ringkas maupun esai eksposatif-naratif.</p>
+            </div>
+            <div>
+                <h3>Tujuan Spesifik Pertemuan 4</h3>
+                <p>1. Memahami teknik merancang poster prosedur padat.<br>2. Menguasai penulisan esai prosedural argumentatif.<br>3. Menyusun draf awal proyek kreatif mandiri.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Two Column Tiled Text (Dualisme Media Tulis) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Dualisme Media Tulis Teks Prosedur</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Poster Prosedur (Visual Multimodal)</h3>
+                <p>Menyajikan instruksi secara ringkas, padat, dan mengandalkan kekuatan ilustrasi gambar serta kalimat imperatif yang menonjol untuk dibaca cepat.</p>
+            </div>
+            <div>
+                <h3>Esai Prosedural (Naratif Eksposatif)</h3>
+                <p>Menyajikan panduan mendalam berbentuk paragraf utuh yang disertai argumentasi logis mengenai alasan pentingnya suatu langkah dilakukan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Section Title -->
+<div class="slide-container" id="slide5">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian I: Poster Prosedur (Multimodal Visual)</h2>
+        <p>Teknik meringkas langkah-langkah menjadi instruksi visual yang menarik dan kuat.</p>
+    </div>
+</div>
+
+<!-- Slide 6: Timeline (4 Tahap Poster) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">4 Tahap Perancangan Poster Prosedur</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>1. Penentuan Tema</h3>
+                    <p>Memilih topik panduan praktis yang solutif bagi pembaca.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2. Reduksi Teks</h3>
+                    <p>Meringkas kalimat panjang menjadi poin imperatif singkat.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>3. Tata Letak (Layout)</h3>
+                    <p>Menyusun alur visual dan ikon agar mudah dibaca mata.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>4. Finalisasi Warna</h3>
+                    <p>Memilih kontras warna penanda langkah secara estetis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Tiled Text with Icons (Karakteristik Poster) -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Karakteristik Utama Poster Prosedur</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <h3>Pesan Padat & Jelas</h3>
+                <p>Judul poster harus langsung menyampaikan tujuan dalam satu kali pandang oleh audiens.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Kalimat Imperatif Kuat</h3>
+                <p>Menggunakan kata perintah aktif yang memotivasi tindakan langsung (cth: <em>Ciptakan, Olah, Kurangi</em>).</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>Harmoni Visual</h3>
+                <p>Perpaduan ikon grafis dan warna latar yang selaras untuk memperkuat pemahaman instruksi.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Two Column (Studi Kasus Poster Kompos) -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Studi Kasus Poster: Pengolahan Sampah Organik</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Tema Poster Proyek</h3>
+                <p><em>"Langkah Mudah Mengolah Sampah Organik Rumah Tangga Menjadi Kompos"</em></p>
+            </div>
+            <div>
+                <h3>Unsur Wajib di Dalam Poster</h3>
+                <p>1. Judul aksi yang menarik.<br>2. Ilustrasi wadah komposter.<br>3. 4 langkah utama pemilahan hingga panen pupuk.<br>4. Tips pencegahan bau.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Section Title -->
+<div class="slide-container" id="slide9">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian II: Esai Prosedural (Eksposatif-Naratif)</h2>
+        <p>Penulisan ulasan mendalam berbentuk paragraf disertai argumentasi logis.</p>
+    </div>
+</div>
+
+<!-- Slide 10: Tiled Text with Icons (Karakteristik Esai) -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">Karakteristik Utama Esai Prosedural</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <h3>Paragraf Runtut</h3>
+                <p>Instruksi disajikan dalam bentuk narasi paragraf eksposisi yang mengalir alami, bukan sekadar daftar poin.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                <h3>Argumentasi Logis</h3>
+                <p>Dilengkapi alasan kuat mengapa setiap langkah dalam prosedur tersebut penting dan memberikan dampak nyata.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+                <h3>Gaya Bahasa Edukatif</h3>
+                <p>Menggunakan ragam bahasa formal, lugas, namun tetap menarik untuk dibaca sebagai artikel panduan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Two Column (Studi Kasus Esai Literasi) -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Studi Kasus Esai: Kiat Literasi Digital</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Tema Esai Prosedural</h3>
+                <p><em>"Kiat Meningkatkan Minat Baca di Era Digital"</em></p>
+            </div>
+            <div>
+                <h3>Struktur Paragraf Esai</h3>
+                <p>1. <strong>Pendahuluan:</strong> Fenomena penurunan minat baca.<br>2. <strong>Isi (Prosedur):</strong> Langkah praktis memilih e-book & mengatur waktu.<br>3. <strong>Penutup:</strong> Argumen reflektif manfaat jangka panjang.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Table (Perbandingan Poster vs Esai) -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title">Perbandingan: Poster vs Esai Prosedural</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspek Pembeda</th>
+                        <th>Poster Prosedur</th>
+                        <th>Esai Prosedural</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Media Penyajian</strong></td>
+                        <td>Multimodal visual (gambar, ikon, teks singkat).</td>
+                        <td>Paragraf naratif eksposatif (tekstual mendalam).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gaya Bahasa</strong></td>
+                        <td>Sangat padat, imperatif langsung, menonjol.</td>
+                        <td>Uraian lugas, argumentatif, dan mengalir.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tujuan Utama</strong></td>
+                        <td>Memandu tindakan cepat secara visual dalam detik.</td>
+                        <td>Memberikan pemahaman komprehensif & alasan logis.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 13: Section Title -->
+<div class="slide-container" id="slide13">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian III: Teknik Menulis & Kaidah Kebahasaan</h2>
+        <p>Mengoptimalkan diksi perintah dan struktur kalimat efektif dalam karya tulis.</p>
+    </div>
+</div>
+
+<!-- Slide 14: Styled Bullet Points (Tips Menulis Efektif) -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">Strategi Penulisan Efektif & Kreatif</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-circle-check"></i><strong>Pilih Kosakata Variatif:</strong> Gunakan verba material yang spesifik (cth: <em>mengayak, menimbun, menyaring</em>).</li>
+                <li><i class="fa-solid fa-arrow-right"></i><strong>Perhatikan Kohesi Paragraf:</strong> Gunakan konjungsi antarkalimat (selain itu, oleh karena itu, di samping itu).</li>
+                <li><i class="fa-solid fa-star"></i><strong>Fokus pada Solusi:</strong> Pastikan instruksi yang ditulis benar-benar dapat diuji dan diterapkan secara nyata.</li>
+                <li><i class="fa-solid fa-thumbtack"></i><strong>Sunting Mandiri:</strong> Periksa kembali ejaan kata baku sesuai Pedoman Umum Ejaan Bahasa Indonesia (PUEBI/EYD).</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Section Title -->
+<div class="slide-container" id="slide15">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Aktivitas Proyek: Perancangan Draf</h2>
+        <p>Praktik merancang draf poster infografis atau menulis esai pendek di kelas.</p>
+    </div>
+</div>
+
+<!-- Slide 16: Table (LKPD 4) -->
+<div class="slide-container" id="slide16">
+    <h2 class="slide-title">Lembar Kerja Kelompok (LKPD 4)</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pilihan Proyek Siswa</th>
+                        <th>Langkah Pengerjaan di Kelas</th>
+                        <th>Target Output Draf</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Opsi A: Poster Prosedur</strong></td>
+                        <td>Merancang sketsa tata letak, ikon, dan draf kalimat imperatif kompos sampah.</td>
+                        <td>Sketsa kasar poster visual.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Opsi B: Esai Prosedural</strong></td>
+                        <td>Menulis kerangka paragraf (pendahuluan, isi, penutup) kiat meningkatkan minat baca.</td>
+                        <td>Kerangka & draf 3 paragraf esai.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Presentasi Singkat</strong></td>
+                        <td>Memaparkan gagasan draf di hadapan kelompok lain untuk mendapat masukan awal.</td>
+                        <td>Catatan revisi perbaikan.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 17: Quote (Refleksi Pembelajaran) -->
+<div class="slide-container" id="slide17">
+    <h2 class="slide-title">Refleksi Pembelajaran Pertemuan 4</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>"Menulis teks prosedur secara kreatif melatih kita untuk menjembatani ide kompleks menjadi panduan yang mudah dipahami dan berdampak positif."</blockquote>
+            <cite>— Refleksi Elemen Menulis Kelas 9</cite>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 18: Full Background Image (Rangkuman Pertemuan 4) -->
+<div class="slide-container" id="slide18" style="background-image: linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)), url('https://placehold.co/1280x720/1e293b/ffffff?text=Rangkuman+Pertemuan+4'); background-size: cover; background-position: center;">
+    <h2 class="slide-title">Rangkuman Kunci & Persiapan Pertemuan 5</h2>
+    <div class="content-area">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            <p>1. <strong>Poster Prosedur:</strong> Mengandalkan ringkasan visual, tata letak estetis, dan kalimat imperatif kuat.</p>
+            <p>2. <strong>Esai Prosedural:</strong> Menyajikan panduan dalam paragraf naratif disertai argumentasi logis.</p>
+            <p>3. <strong>Pertemuan Berikutnya:</strong> Transformasi petikan cerpen menjadi teks prosedur dan refleksi akhir bab.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 19: Tiled Text with Icons (Manfaat Penulisan) -->
+<div class="slide-container" id="slide19">
+    <h2 class="slide-title">Manfaat Keterampilan Menulis Prosedur</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <h3>Kreativitas Multimodal</h3>
+                <p>Mengasah kemampuan mengemas informasi dalam bentuk visual maupun narasi teks yang menarik.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-compass"></i></div>
+                <h3>Kejelasan Berpikir</h3>
+                <p>Melatih ketelitian menyusun urutan ide secara logis agar bermanfaat bagi pembaca.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-handshake-angle"></i></div>
+                <h3>Kontribusi Sosial</h3>
+                <p>Menghasilkan karya panduan yang solutif untuk menyelesaikan masalah di lingkungan sekitar.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 20: Q&A -->
+<div class="slide-container" id="slide20">
+    <div class="qa-layout">
+        <h2>Pertemuan 4 Selesai!</h2>
+        <p>Terima kasih atas kreativitas dan kerja keras kalian dalam merancang draf poster dan esai hari ini.</p>
+        <div style="margin-top: 40px; color: #7c3aed; font-weight: 700; font-size: 20px;">
+            Kurikulum Merdeka | Bahasa Indonesia Kelas 9
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

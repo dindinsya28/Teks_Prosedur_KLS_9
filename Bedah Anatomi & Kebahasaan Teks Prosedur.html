@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekspedisi Bedah 7 Pertanyaan Teks Prosedur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .wadah-aplikasi {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 950px;
+            overflow: hidden;
+            position: relative;
+        }
+        .kepala-aplikasi {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #059669;
+        }
+        .kepala-aplikasi h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin: 0;
+        }
+        .badan-konten {
+            padding: 30px;
+            max-height: 82vh;
+            overflow-y: auto;
+        }
+        .kotak-selamat {
+            text-align: center;
+            padding: 20px;
+        }
+        .kotak-selamat h3 {
+            font-family: 'Poppins', sans-serif;
+            color: #1e293b;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .kotak-selamat p {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .grup-formulir {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .grup-formulir label {
+            display: block;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .isian-teks {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .isian-teks:focus {
+            border-color: #059669;
+        }
+        .tombol-utama {
+            background-color: #059669;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .tombol-utama:hover {
+            background-color: #047857;
+        }
+        
+        /* Area Permainan */
+        .kartu-bacaan {
+            background-color: #f8fafc;
+            border-left: 4px solid #059669;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+        .kartu-bacaan h4 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+        }
+        .kartu-bacaan p {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .tabel-bedah {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .tabel-bedah th, .tabel-bedah td {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .tabel-bedah th {
+            background-color: #059669;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        .pilihan-struktur {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            width: 100%;
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            background-color: #f8fafc;
+            outline: none;
+        }
+
+        /* Tampilan Hasil Per Misi */
+        .kartu-hasil-misi {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        /* Tampilan Akhir (Nilai Raksasa & Pangkat) */
+        .kartu-akhir-raksasa {
+            background: linear-gradient(135deg, #f0fdf4, #e6fffa);
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        .angka-raksasa {
+            font-size: 80px;
+            font-weight: 900;
+            color: #047857;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+        .kotak-pangkat {
+            background-color: #059669;
+            color: white;
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+        }
+
+        .tersembunyi { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="wadah-aplikasi">
+    <div class="kepala-aplikasi">
+        <h2><i class="fa-solid fa-medal"></i> Ekspedisi Bedah 7 Pertanyaan Teks Prosedur</h2>
+        <span id="labelKelompokTampil" style="font-size: 14px; font-weight: 600; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px;">Kelompok Belum Masuk</span>
+    </div>
+
+    <div class="badan-konten">
+        <!-- TAMPILAN AWAL (LOGIN KELOMPOK) -->
+        <div id="tampilanMasuk" class="kotak-selamat">
+            <h3>Selamat Datang di Ekspedisi Analisis Teks!</h3>
+            <p>Kelompok Anda akan menjalani <strong>5 Misi Teks Berbeda</strong>. Setiap teks diuji melalui <strong>7 pertanyaan struktur</strong> secara rinci. Di setiap akhir misi, skor perolehan (skala 0–100) akan langsung diumumkan, dan di akhir ekspedisi muncul akumulasi nilai total raksasa beserta pangkat kehormatan tim!</p>
+            
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="grup-formulir">
+                    <label for="isianNamaKelompok">Nama Kelompok & Anggota</label>
+                    <input type="text" id="isianNamaKelompok" class="isian-teks" placeholder="Contoh: Kelompok 1 - Rajawali">
+                </div>
+                <button onclick="mulaiEkspedisi()" class="tombol-utama" style="width: 100%;">
+                    <i class="fa-solid fa-play"></i> Mulai Ekspedisi Sekarang
+                </button>
+            </div>
+        </div>
+
+        <!-- TAMPILAN AREA PERMAINAN PER MISI -->
+        <div id="tampilanPermainan" class="tersembunyi">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 id="labelIndikatorMisi" style="margin: 0; font-family: 'Poppins', sans-serif; color: #1e293b;">Misi 1 dari 5</h3>
+                <span id="labelJudulMisiAktif" style="color: #059669; font-weight: 700; font-size: 14px;"></span>
+            </div>
+
+            <div class="kartu-bacaan">
+                <h4 id="teksJudulMisi"><i class="fa-solid fa-book-open"></i> Judul Teks Prosedur</h4>
+                <p id="teksIsiMisi">Isi teks prosedur...</p>
+            </div>
+
+            <p style="font-weight: 700; color: #1e293b; margin-bottom: 12px; font-size: 14px;">
+                Tentukan struktur yang tepat untuk ke-7 kalimat uji di bawah ini:
+            </p>
+
+            <table class="tabel-bedah">
+                <thead>
+                    <tr>
+                        <th style="width: 60%;">Kalimat Kutipan (Uji ke-1 s.d. 7)</th>
+                        <th style="width: 40%;">Pilih Kategori Struktur</th>
+                    </tr>
+                </thead>
+                <tbody id="wadahTabelMisi">
+                    <!-- Diisi lewat JavaScript -->
+                </tbody>
+            </table>
+
+            <div style="text-align: center; margin-top: 15px;">
+                <button onclick="prosesJawabanMisi()" class="tombol-utama">
+                    <i class="fa-solid fa-circle-check"></i> Kirim Jawaban Misi Ini
+                </button>
+            </div>
+        </div>
+
+        <!-- TAMPILAN HASIL SEMENTARA PER MISI -->
+        <div id="tampilanHasilMisi" class="tersembunyi">
+            <div class="kartu-hasil-misi">
+                <h3 id="judulHasilMisi" style="font-family: 'Poppins', sans-serif; color: #166534; margin-top: 0;">Hasil Misi Selesai</h3>
+                <p style="color: #334155; font-size: 15px;">Perolehan skor untuk teks ini:</p>
+                <div style="font-size: 48px; font-weight: 900; color: #047857; font-family: 'Poppins', sans-serif; margin: 15px 0;" id="skorMisiTampil">0</div>
+                <p id="pesanUmpanBalikMisi" style="color: #475569; font-size: 15px; margin-bottom: 25px;"></p>
+                
+                <button onclick="lanjutkanMisiBerikutnya()" class="tombol-utama">
+                    Lanjut ke Misi Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- TAMPILAN AKHIR EKSPEDISI (NILAI RAKSASA & PANGKAT) -->
+        <div id="tampilanAkhir" class="tersembunyi">
+            <div class="kartu-akhir-raksasa">
+                <h3 style="font-family: 'Poppins', sans-serif; color: #1e293b; margin-top: 0; font-size: 24px;">Ekspedisi 5 Teks Selesai!</h3>
+                <p style="color: #475569; font-size: 16px; margin-bottom: 10px;">Akumulasi Nilai Akhir Total:</p>
+                
+                <div class="angka-raksasa" id="nilaiAkhirRaksasa">0</div>
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Dari Skala Maksimal 500 Poin</p>
+
+                <div>
+                    <span class="kotak-pangkat" id="pangkatTimTampil">Pangkat Tim</span>
+                </div>
+
+                <p id="deskripsiPangkatTampil" style="color: #334155; font-size: 16px; line-height: 1.6; max-width: 700px; margin: 0 auto 30px auto;"></p>
+
+                <div style="text-align: center;">
+                    <button onclick="location.reload()" class="tombol-utama" style="background-color: #2563eb; padding: 14px 30px; font-size: 16px;">
+                        <i class="fa-solid fa-rotate-right"></i> Mainkan Ulang Ekspedisi Baru
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let namaKelompokPengguna = "";
+    let daftarMisiPilihan = [];
+    let indeksMisiAktif = 0;
+    let totalAkumulasiSkor = 0;
+
+    // Database 10 Teks Prosedur Berbeda dengan masing-masing tepat 7 pertanyaan struktur
+    const databaseMasterTeks = [
+        {
+            judul: "Cara Membuat Masker Wajah Alami dari Lidah Buaya",
+            isi: "Masker wajah alami dari lidah buaya sangat efektif untuk menyegarkan kulit wajah. Perawatan mandiri ini dapat dilakukan dengan mudah di rumah menggunakan bahan ekonomis. Siapkan satu batang pelepah lidah buaya segar, pisau kecil, dan perasan air jeruk nipis. Sediakan pula mangkuk bersih sebagai wadah pencampur adonan masker. Kupas kulit pelepah lidah buaya secara hati-hati untuk mengambil gel bening di dalamnya. Haluskan gel tersebut, lalu campurkan dengan air jeruk nipis hingga tercampur rata. Demikian cara mudah merawat kesehatan kulit wajah Anda menggunakan bahan alami.",
+            soalStruktur: [
+                { kalimat: "Masker wajah alami dari lidah buaya sangat efektif untuk menyegarkan kulit wajah.", kunci: "Tujuan" },
+                { kalimat: "Perawatan mandiri ini dapat dilakukan dengan mudah di rumah menggunakan bahan ekonomis.", kunci: "Tujuan" },
+                { kalimat: "Siapkan satu batang pelepah lidah buaya segar, pisau kecil, dan perasan air jeruk nipis.", kunci: "Material" },
+                { kalimat: "Sediakan pula mangkuk bersih sebagai wadah pencampur adonan masker.", kunci: "Material" },
+                { kalimat: "Kupas kulit pelepah lidah buaya secara hati-hati untuk mengambil gel bening di dalamnya.", kunci: "Langkah-langkah" },
+                { kalimat: "Haluskan gel tersebut, lalu campurkan dengan air jeruk nipis hingga tercampur rata.", kunci: "Langkah-langkah" },
+                { kalimat: "Demikian cara mudah merawat kesehatan kulit wajah Anda menggunakan bahan alami.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Membuat Kompos Organik Rumah Tangga",
+            isi: "Pengolahan sampah organik menjadi kompos berguna untuk menyuburkan tanaman pekarangan. Kegiatan daur ulang ini juga membantu menjaga kebersihan lingkungan sekitar rumah. Siapkan wadah ember besar, sisa sayuran dapur, dan sekam padi secukupnya. Sediakan pula cairan pengurai mikroorganisme untuk mempercepat proses pembusukan. Masukkan sisa sayuran dan sekam secara berlapis-lapis ke dalam wadah ember. Siram lapisan tersebut dengan larutan pengurai secara berkala setiap tiga hari sekali. Tutup rapat wadah dan tunggu hingga dua minggu sampai kompos siap digunakan.",
+            soalStruktur: [
+                { kalimat: "Pengolahan sampah organik menjadi kompos berguna untuk menyuburkan tanaman pekarangan.", kunci: "Tujuan" },
+                { kalimat: "Kegiatan daur ulang ini juga membantu menjaga kebersihan lingkungan sekitar rumah.", kunci: "Tujuan" },
+                { kalimat: "Siapkan wadah ember besar, sisa sayuran dapur, dan sekam padi secukupnya.", kunci: "Material" },
+                { kalimat: "Sediakan pula cairan pengurai mikroorganisme untuk mempercepat proses pembusukan.", kunci: "Material" },
+                { kalimat: "Masukkan sisa sayuran dan sekam secara berlapis-lapis ke dalam wadah ember.", kunci: "Langkah-langkah" },
+                { kalimat: "Siram lapisan tersebut dengan larutan pengurai secara berkala setiap tiga hari sekali.", kunci: "Langkah-langkah" },
+                { kalimat: "Tutup rapat wadah dan tunggu hingga dua minggu sampai kompos siap digunakan.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Mencuci Tangan Antiseptik yang Benar",
+            isi: "Mencuci tangan dengan benar dapat mencegah penularan kuman penyakit berbahaya. Kebiasaan sehat ini wajib diterapkan sebelum makan dan setelah beraktivitas di luar. Sediakan air mengalir yang bersih dan sabun antiseptik cair di dekat wastafel. Siapkan pula handuk kering atau tisu steril untuk mengeringkan tangan nanti. Basahi tangan dengan air bersih, lalu tuangkan sabun antiseptik secukupnya. Gosok telapak tangan, punggung tangan, dan sela-sela jari selama dua puluh detik. Bilas hingga bersih dan keringkan tangan menggunakan handuk yang telah disiapkan.",
+            soalStruktur: [
+                { kalimat: "Mencuci tangan dengan benar dapat mencegah penularan kuman penyakit berbahaya.", kunci: "Tujuan" },
+                { kalimat: "Kebiasaan sehat ini wajib diterapkan sebelum makan dan setelah beraktivitas di luar.", kunci: "Tujuan" },
+                { kalimat: "Sediakan air mengalir yang bersih dan sabun antiseptik cair di dekat wastafel.", kunci: "Material" },
+                { kalimat: "Siapkan pula handuk kering atau tisu steril untuk mengeringkan tangan nanti.", kunci: "Material" },
+                { kalimat: "Basahi tangan dengan air bersih, lalu tuangkan sabun antiseptik secukupnya.", kunci: "Langkah-langkah" },
+                { kalimat: "Gosok telapak tangan, punggung tangan, dan sela-sela jari selama dua puluh detik.", kunci: "Langkah-langkah" },
+                { kalimat: "Bilas hingga bersih dan keringkan tangan menggunakan handuk yang telah disiapkan.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Membuat Minuman Wedang Jahe Tradisional",
+            isi: "Wedang jahe berkhasiat untuk menghangatkan tubuh dan meredakan masuk angin. Minuman herbal ini sangat nikmat dikonsumsi saat cuaca dingin atau malam hari. Siapkan dua ruas jahe merah pilihan, gula aren, dan dua gelas air putih. Sediakan pula panci kecil bersih dan selembar daun pandan wangi. Bakar sebentar jahe di atas api kecil, lalu memarkan hingga pipih. Rebus jahe bersama gula aren, daun pandan, dan air di dalam panci hingga mendidih. Tuang wedang jahe ke dalam cangkir saji dan nikmati selagi hangat.",
+            soalStruktur: [
+                { kalimat: "Wedang jahe berkhasiat untuk menghangatkan tubuh dan meredakan masuk angin.", kunci: "Tujuan" },
+                { kalimat: "Minuman herbal ini sangat nikmat dikonsumsi saat cuaca dingin atau malam hari.", kunci: "Tujuan" },
+                { kalimat: "Siapkan dua ruas jahe merah pilihan, gula aren, dan dua gelas air putih.", kunci: "Material" },
+                { kalimat: "Sediakan pula panci kecil bersih dan selembar daun pandan wangi.", kunci: "Material" },
+                { kalimat: "Bakar sebentar jahe di atas api kecil, lalu memarkan hingga pipih.", kunci: "Langkah-langkah" },
+                { kalimat: "Rebus jahe bersama gula aren, daun pandan, dan air di dalam panci hingga mendidih.", kunci: "Langkah-langkah" },
+                { kalimat: "Tuang wedang jahe ke dalam cangkir saji dan nikmati selagi hangat.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Pendaftaran Akun Layanan Publik Online",
+            isi: "Pendaftaran akun online mempermudah masyarakat mengakses layanan administrasi kependudukan. Sistem digital ini menghemat waktu tanpa harus mengantre di kantor pelayanan fisik. Siapkan kartu identitas NIK, nomor ponsel aktif, dan alamat email yang valid. Sediakan pula dokumen pendukung berupa foto pindai KTP sesuai ketentuan portal. Akses portal web resmi layanan publik melalui peramban internet di gawai Anda. Isi formulir pendaftaran data diri dengan lengkap dan benar sesuai dokumen asli. Aktivasi akun melalui tautan verifikasi yang dikirimkan ke email dan akun siap digunakan.",
+            soalStruktur: [
+                { kalimat: "Pendaftaran akun online mempermudah masyarakat mengakses layanan administrasi kependudukan.", kunci: "Tujuan" },
+                { kalimat: "Sistem digital ini menghemat waktu tanpa harus mengantre di kantor pelayanan fisik.", kunci: "Tujuan" },
+                { kalimat: "Siapkan kartu identitas NIK, nomor ponsel aktif, dan alamat email yang valid.", kunci: "Material" },
+                { kalimat: "Sediakan pula dokumen pendukung berupa foto pindai KTP sesuai ketentuan portal.", kunci: "Material" },
+                { kalimat: "Akses portal web resmi layanan publik melalui peramban internet di gawai Anda.", kunci: "Langkah-langkah" },
+                { kalimat: "Isi formulir pendaftaran data diri dengan lengkap dan benar sesuai dokumen asli.", kunci: "Langkah-langkah" },
+                { kalimat: "Aktivasi akun melalui tautan verifikasi yang dikirimkan ke email dan akun siap digunakan.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Membuat Kerajinan Tempat Pensil dari Botol Plastik",
+            isi: "Barang bekas botol plastik dapat diubah menjadi tempat pensil meja yang unik. Kegiatan kreatif ini membantu mengurangi volume sampah plastik di lingkungan rumah. Siapkan botol plastik bekas air mineral, cutter tajam, dan cat akrilik. Sediakan pula kuas lukis serta lem tembak untuk menghias wadah nantinya. Potong bagian bawah botol plastik menggunakan cutter secara hati-hati dan rata. Warnai permukaan luar botol dengan cat akrilik berbagai warna sesuai selera Anda. Keringkan di bawah sinar matahari dan tempat pensil kreatif siap dipakai.",
+            soalStruktur: [
+                { kalimat: "Barang bekas botol plastik dapat diubah menjadi tempat pensil meja yang unik.", kunci: "Tujuan" },
+                { kalimat: "Kegiatan kreatif ini membantu mengurangi volume sampah plastik di lingkungan rumah.", kunci: "Tujuan" },
+                { kalimat: "Siapkan botol plastik bekas air mineral, cutter tajam, dan cat akrilik.", kunci: "Material" },
+                { kalimat: "Sediakan pula kuas lukis serta lem tembak untuk menghias wadah nantinya.", kunci: "Material" },
+                { kalimat: "Potong bagian bawah botol plastik menggunakan cutter secara hati-hati dan rata.", kunci: "Langkah-langkah" },
+                { kalimat: "Warnai permukaan luar botol dengan cat akrilik berbagai warna sesuai selera Anda.", kunci: "Langkah-langkah" },
+                { kalimat: "Keringkan di bawah sinar matahari dan tempat pensil kreatif siap dipakai.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Mengoperasikan Mesin Pencetak Dokumen",
+            isi: "Pencetakan dokumen digital dapat dilakukan secara cepat dan mudah melalui komputer. Pemahaman operasional ini sangat penting untuk mendukung tugas perkantoran atau sekolah. Siapkan mesin printer yang sudah terhubung daya listrik dan kabel data USB. Sediakan pula kertas HVS putih ukuran kuarto atau A4 secukupnya pada baki. Nyalakan mesin printer dengan menekan tombol daya utama di bagian depan. Buka dokumen pada layar komputer, lalu pilih menu cetak atau tekan tombol Ctrl+P. Ambil hasil cetakan kertas pada baki keluar printer dengan rapi dan selesai.",
+            soalStruktur: [
+                { kalimat: "Pencetakan dokumen digital dapat dilakukan secara cepat dan mudah melalui komputer.", kunci: "Tujuan" },
+                { kalimat: "Pemahaman operasional ini sangat penting untuk mendukung tugas perkantoran atau sekolah.", kunci: "Tujuan" },
+                { kalimat: "Siapkan mesin printer yang sudah terhubung daya listrik dan kabel data USB.", kunci: "Material" },
+                { kalimat: "Sediakan pula kertas HVS putih ukuran kuarto atau A4 secukupnya pada baki.", kunci: "Material" },
+                { kalimat: "Nyalakan mesin printer dengan menekan tombol daya utama di bagian depan.", kunci: "Langkah-langkah" },
+                { kalimat: "Buka dokumen pada layar komputer, lalu pilih menu cetak atau tekan tombol Ctrl+P.", kunci: "Langkah-langkah" },
+                { kalimat: "Ambil hasil cetakan kertas pada baki keluar printer dengan rapi dan selesai.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Membuat Bubur Ayam Sederhana untuk Sarapan",
+            isi: "Bubur ayam hangat sangat nikmat disantap sebagai menu sarapan pagi bersama keluarga. Makanan bergizi ini mudah dicerna dan memberi energi positif untuk memulai hari. Siapkan beras putih bersih, kaldu ayam murni, dan suwiran daging ayam. Sediakan pula irisan daun bawang, seledri, dan kerupuk renyah sebagai pelengkap. Rebus beras bersama air kaldu ayam di dalam panci sambil diaduk terus-menerus. Masak hingga teksturnya berubah menjadi bubur lembut matang sempurna. Sajikan bubur selagi hangat dengan taburan suwiran ayam dan kerupuk renyah.",
+            soalStruktur: [
+                { kalimat: "Bubur ayam hangat sangat nikmat disantap sebagai menu sarapan pagi bersama keluarga.", kunci: "Tujuan" },
+                { kalimat: "Makanan bergizi ini mudah dicerna dan memberi energi positif untuk memulai hari.", kunci: "Tujuan" },
+                { kalimat: "Siapkan beras putih bersih, kaldu ayam murni, dan suwiran daging ayam.", kunci: "Material" },
+                { kalimat: "Sediakan pula irisan daun bawang, seledri, dan kerupuk renyah sebagai pelengkap.", kunci: "Material" },
+                { kalimat: "Rebus beras bersama air kaldu ayam di dalam panci sambil diaduk terus-menerus.", kunci: "Langkah-langkah" },
+                { kalimat: "Masak hingga teksturnya berubah menjadi bubur lembut matang sempurna.", kunci: "Langkah-langkah" },
+                { kalimat: "Sajikan bubur selagi hangat dengan taburan suwiran ayam dan kerupuk renyah.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Merawat Tanaman Hias Lidah Mertua di Dalam Ruangan",
+            isi: "Tanaman lidah mertua berfungsi sebagai pembersih udara alami di dalam ruangan rumah. Perawatan yang tepat membuat tanaman hias ini tumbuh subur dan tahan lama. Siapkan pot bunga berlubang, media tanam porous, dan bibit tanaman sehat. Sediakan pula pupuk kompos padat dan ember penyiram tanaman berisi air. Letakkan bibit tanaman di tengah pot dan tambahkan media tanam hingga padat. Siram air secukupnya secara rutin hanya saat media tanam mulai mengering. Letakkan pot di dekat jendela agar mendapat pasokan sinar matahari yang cukup.",
+            soalStruktur: [
+                { kalimat: "Tanaman lidah mertua berfungsi sebagai pembersih udara alami di dalam ruangan rumah.", kunci: "Tujuan" },
+                { kalimat: "Perawatan yang tepat membuat tanaman hias ini tumbuh subur dan tahan lama.", kunci: "Tujuan" },
+                { kalimat: "Siapkan pot bunga berlubang, media tanam porous, dan bibit tanaman sehat.", kunci: "Material" },
+                { kalimat: "Sediakan pula pupuk kompos padat dan ember penyiram tanaman berisi air.", kunci: "Material" },
+                { kalimat: "Letakkan bibit tanaman di tengah pot dan tambahkan media tanam hingga padat.", kunci: "Langkah-langkah" },
+                { kalimat: "Siram air secukupnya secara rutin hanya saat media tanam mulai mengering.", kunci: "Langkah-langkah" },
+                { kalimat: "Letakkan pot di dekat jendela agar mendapat pasokan sinar matahari yang cukup.", kunci: "Penutup" }
+            ]
+        },
+        {
+            judul: "Cara Mengirim Surat Elektronik dengan Lampiran Dokumen",
+            isi: "Pengiriman dokumen penting secara digital dapat dilakukan secara cepat melalui email. Metode ini sangat aman dan efisien untuk keperluan komunikasi formal maupun tugas. Siapkan akun email aktif dan file digital dokumen yang akan dilampirkan. Pastikan ukuran file tidak melebihi batas maksimal kapasitas lampiran sistem. Klik tombol buat pesan baru pada aplikasi atau laman web email Anda. Masukkan alamat email tujuan, tulis subjek, serta unggah file lewat ikon klip kertas. Periksa kembali kelengkapan isi pesan dan klik tombol kirim untuk menyelesaikan.",
+            soalStruktur: [
+                { kalimat: "Pengiriman dokumen penting secara digital dapat dilakukan secara cepat melalui email.", kunci: "Tujuan" },
+                { kalimat: "Metode ini sangat aman dan efisien untuk keperluan komunikasi formal maupun tugas.", kunci: "Tujuan" },
+                { kalimat: "Siapkan akun email aktif dan file digital dokumen yang akan dilampirkan.", kunci: "Material" },
+                { kalimat: "Pastikan ukuran file tidak melebihi batas maksimal kapasitas lampiran sistem.", kunci: "Material" },
+                { kalimat: "Klik tombol buat pesan baru pada aplikasi atau laman web email Anda.", kunci: "Langkah-langkah" },
+                { kalimat: "Masukkan alamat email tujuan, tulis subjek, serta unggah file lewat ikon klip kertas.", kunci: "Langkah-langkah" },
+                { kalimat: "Periksa kembali kelengkapan isi pesan dan klik tombol kirim untuk menyelesaikan.", kunci: "Penutup" }
+            ]
+        }
+    ];
+
+    function acakArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    function mulaiEkspedisi() {
+        const inputNama = document.getElementById('isianNamaKelompok').value.trim();
+        if (!inputNama) {
+            alert('Mohon masukkan nama kelompok terlebih dahulu!');
+            return;
+        }
+
+        namaKelompokPengguna = inputNama;
+        document.getElementById('labelKelompokTampil').innerText = `Kelompok: ${namaKelompokPengguna}`;
+
+        let salinanDatabase = [...databaseMasterTeks];
+        acakArray(salinanDatabase);
+        daftarMisiPilihan = salinanDatabase.slice(0, 5); // Ambil 5 teks acak
+
+        indeksMisiAktif = 0;
+        totalAkumulasiSkor = 0;
+
+        document.getElementById('tampilanMasuk').classList.add('tersembunyi');
+        document.getElementById('tampilanPermainan').classList.remove('tersembunyi');
+        muatMisiAktif();
+    }
+
+    function muatMisiAktif() {
+        const misi = daftarMisiPilihan[indeksMisiAktif];
+        document.getElementById('labelIndikatorMisi').innerText = `Misi ${indeksMisiAktif + 1} dari 5`;
+        document.getElementById('labelJudulMisiAktif').innerText = `Ekspedisi Teks #${indeksMisiAktif + 1}`;
+        document.getElementById('teksJudulMisi').innerHTML = `<i class="fa-solid fa-book-open"></i> ${misi.judul}`;
+        document.getElementById('teksIsiMisi').innerText = misi.isi;
+
+        const wadahTabel = document.getElementById('wadahTabelMisi');
+        wadahTabel.innerHTML = "";
+
+        misi.soalStruktur.forEach((item, idx) => {
+            const baris = document.createElement('tr');
+            baris.innerHTML = `
+                <td><strong>Uji ${idx + 1}:</strong> "${item.kalimat}"</td>
+                <td>
+                    <select id="pilihanStruktur_${idx}" class="pilihan-struktur">
+                        <option value="">-- Pilih Struktur --</option>
+                        <option value="Tujuan">Tujuan</option>
+                        <option value="Material">Material (Alat/Bahan)</option>
+                        <option value="Langkah-langkah">Langkah-langkah</option>
+                        <option value="Penutup">Penutup</option>
+                    </select>
+                </td>
+            `;
+            wadahTabel.appendChild(baris);
+        });
+
+        document.getElementById('tampilanHasilMisi').classList.add('tersembunyi');
+        document.getElementById('tampilanPermainan').classList.remove('tersembunyi');
+    }
+
+    function prosesJawabanMisi() {
+        const misi = daftarMisiPilihan[indeksMisiAktif];
+        let jumlahBenar = 0;
+
+        for (let i = 0; i < misi.soalStruktur.length; i++) {
+            const pilihanSiswa = document.getElementById(`pilihanStruktur_${i}`).value;
+            if (pilihanSiswa === misi.soalStruktur[i].kunci) {
+                jumlahBenar++;
+            }
+        }
+
+        // Skor per misi skala 0 - 100 (7 soal, masing-masing bobot ~14.28 poin)
+        let skorMisiIni = Math.round((jumlahBenar / misi.soalStruktur.length) * 100);
+        totalAkumulasiSkor += skorMisiIni;
+
+        document.getElementById('judulHasilMisi').innerText = `Selesai Misi ${indeksMisiAktif + 1}: ${misi.judul}`;
+        document.getElementById('skorMisiTampil').innerText = skorMisiIni;
+        document.getElementById('pesanUmpanBalikMisi').innerText = `Kelompok Anda berhasil menjawab benar ${jumlahBenar} dari 7 kalimat uji pada teks ini.`;
+
+        document.getElementById('tampilanPermainan').classList.add('tersembunyi');
+        document.getElementById('tampilanHasilMisi').classList.remove('tersembunyi');
+    }
+
+    function lanjutkanMisiBerikutnya() {
+        indeksMisiAktif++;
+        if (indeksMisiAktif < 5) {
+            muatMisiAktif();
+        } else {
+            tampilkanHasilAkhirEkspedisi();
+        }
+    }
+
+    function tampilkanHasilAkhirEkspedisi() {
+        document.getElementById('tampilanHasilMisi').classList.add('tersembunyi');
+        document.getElementById('tampilanAkhir').classList.remove('tersembunyi');
+
+        document.getElementById('nilaiAkhirRaksasa').innerText = totalAkumulasiSkor;
+
+        let gelarPangkat = "";
+        let deskripsiGelar = "";
+
+        if (totalAkumulasiSkor === 500) {
+            gelarPangkat = "⭐ JENDERAL AHLI BEDAH TEKS ⭐";
+            deskripsiGelar = "Luar biasa! Ketelitian kelompok Anda sempurna tanpa cela di seluruh 5 misi teks prosedur (35 total uji kalimat). Penguasaan struktur berada di tingkat tertinggi!";
+        } else if (totalAkumulasiSkor >= 400) {
+            gelarPangkat = "🎖️ KOMANDAN SPESIALIS STRUKTUR 🎖️";
+            deskripsiGelar = "Sangat Hebat! Kelompok Anda menunjukkan kemampuan analisis teks prosedur yang sangat tajam dan presisi tinggi sepanjang ekspedisi.";
+        } else if (totalAkumulasiSkor >= 300) {
+            gelarPangkat = "🛡️ KAPTEN PENELITI TEKS 🛡️";
+            deskripsiGelar = "Kerja bagus! Kelompok Anda berhasil melewati seluruh misi dengan baik. Terus tingkatkan ketelitian dalam mengidentifikasi struktur teks.";
+        } else {
+            gelarPangkat = "🧭 KADET MUDA PEMULA 🧭";
+            deskripsiGelar = "Ekspedisi selesai! Kelompok Anda telah menyelesaikan seluruh tantangan. Mari ulas kembali materi struktur teks prosedur agar hasil di ekspedisi berikutnya semakin memuaskan.";
+        }
+
+        document.getElementById('pangkatTimTampil').innerText = gelarPangkat;
+        document.getElementById('deskripsiPangkatTampil').innerText = deskripsiGelar;
+    }
+</script>
+
+</body>
+</html>

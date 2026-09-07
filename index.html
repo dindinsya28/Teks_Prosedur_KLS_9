@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Digital: Teks Prosedur Kelas 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -3rem auto 3rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Info Section (Overview & Tujuan) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .info-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* Materi Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        .materi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .materi-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .materi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .materi-badge {
+            background: #dbeafe;
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            width: fit-content;
+            margin-bottom: 1rem;
+        }
+
+        .materi-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .materi-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .materi-card .btn-access {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .materi-card .btn-access::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .materi-card:hover .btn-access::after {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .container {
+                margin-top: -2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ruang Eksplorasi: Teks Prosedur</h1>
+        <p>Platform Pembelajaran Interaktif Bahasa Indonesia Kelas 9 Semester Ganjil</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- Overview & Tujuan Section -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h2>📚 Overview Aplikasi</h2>
+                <p>
+                    Repositori ini merupakan ruang belajar digital yang mendokumentasikan rangkaian materi pembelajaran Teks Prosedur secara sistematis. Dirancang khusus untuk siswa kelas 9, aplikasi berbasis web ini merangkum keseluruhan silabus ke dalam 6 modul pertemuan. Mulai dari pemahaman konseptual, analisis struktur linguistik, hingga tahap kreasi dan praktik penyajian, seluruh materi disusun agar mudah diakses, terstruktur, dan ramah pengguna untuk mendukung pembelajaran mandiri.
+                </p>
+            </div>
+            
+            <div class="info-card">
+                <h2>🎯 Tujuan & Signifikansi</h2>
+                <p>
+                    Tautan ini dibangun dengan visi menjembatani literasi tradisional dengan teknologi digital. Tujuannya bukan sekadar mendistribusikan bahan bacaan, melainkan <strong>membentuk daya nalar logis dan sekuensial</strong> siswa. Dengan memahami teks prosedur secara mendalam, siswa dilatih untuk dapat mengurai instruksi kompleks menjadi langkah-langkah presisi, sebuah keterampilan esensial yang sangat relevan untuk memecahkan masalah dalam kehidupan nyata dan dunia profesional masa depan.
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigasi Materi Section -->
+        <h2 class="section-title">Navigasi Materi Pembelajaran</h2>
+        
+        <div class="materi-grid">
+            <!-- Pertemuan 1 -->
+            <a href="pertemuan-1.html" class="materi-card">
+                <span class="materi-badge">Pertemuan 1</span>
+                <h3>Konsep & Karakteristik</h3>
+                <p>Pengenalan dasar teks prosedur, mengidentifikasi ciri-ciri, dan memahami perbedaan esensialnya dengan jenis teks lain.</p>
+                <div class="btn-access">Akses Materi</div>
+            </a>
+
+            <!-- Pertemuan 2 -->
+            <a href="pertemuan-2.html" class="materi-card">
+                <span class="materi-badge">Pertemuan 2</span>
+                <h3>Fungsi & Anatomi Teks</h3>
+                <p>Membongkar struktur penyusun teks prosedur: Tujuan, Material/Bahan, Langkah-langkah, dan Penegasan Ulang.</p>
+                <div class="btn-access">Akses Materi</div>
+            </a>
+
+            <!-- Pertemuan 3 -->
+            <a href="pertemuan-3.html" class="materi-card">
+                <span class="materi-badge">Pertemuan 3</span>
+                <h3>Unsur Kebahasaan</h3>
+                <p>Eksplorasi linguistik: Kalimat imperatif, konjungsi temporal, verba material, dan penggunaan keterangan alat/cara.</p>
+                <div class="btn-access">Akses Materi</div>
+            </a>
+
+            <!-- Pertemuan 4 -->
+            <a href="pertemuan-4.html" class="materi-card">
+                <span class="materi-badge">Pertemuan 4</span>
+                <h3>Analisis & Identifikasi</h3>
+                <p>Studi kasus nyata. Mengukur kemampuan siswa dalam menemukan kesalahan struktur dan kaidah kebahasaan dalam teks rumpang.</p>
+                <div class="btn-access">Akses Materi</div>
+            </a>
+
+            <!-- Pertemuan 5 -->
+            <a href="pertemuan-5.html" class="materi-card">
+                <span class="materi-badge">Pertemuan 5</span>
+                <h3>Desain & Kerangka</h3>
+                <p>Proses kreatif penyusunan teks prosedur. Berlatih merancang ide pokok dan mengembangkan kerangka tulisan yang sistematis.</p>
+                <div class="btn-access">Akses Materi</div>
+            </a>
+
+            <!-- Pertemuan 6 -->
+            <a href="pertemuan-6.html" class="materi-card">
+                <span class="materi-badge">Pertemuan 6</span>
+                <h3>Produksi & Presentasi</h3>
+                <p>Tahap final. Siswa mempresentasikan teks prosedur buatannya, mengevaluasi efektivitas instruksi, dan melakukan refleksi karya.</p>
+                <div class="btn-access">Akses Materi</div>
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Modul Pembelajaran Teks Prosedur Kelas 9. Hosted on GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>

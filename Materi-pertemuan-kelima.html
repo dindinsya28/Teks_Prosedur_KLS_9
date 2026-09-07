@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mengubah Petikan Cerpen Menjadi Teks Prosedur & Refleksi Akhir Bab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+            place-items: center;
+        }
+        .slide-container {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lato', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px;
+            position: relative;
+            width: 1280px;
+        }
+        .slide-container::before {
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at top right, rgba(217, 119, 6, 0.05), transparent 50%);
+        }
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1, h2, h3 { color: #1e293b; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
+        p, li { color: #475569; font-family: 'Lato', sans-serif; font-size: 18px; line-height: 1.5; margin: 0; }
+        
+        .slide-title { font-size: 38px; font-weight: 700; margin-bottom: 30px; text-align: left; width: 100%; color: #0f172a; border-bottom: 3px solid #d97706; padding-bottom: 10px; }
+        .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+
+        /* Layouts */
+        .title-layout { text-align: center; }
+        .title-layout h1 { font-size: 52px; color: #0f172a; margin-bottom: 20px; line-height: 1.2; }
+        .title-layout .subtitle { font-size: 22px; color: #d97706; font-weight: 600; max-width: 900px; margin: 0 auto; }
+
+        .section-title-layout { text-align: center; }
+        .section-title-layout h2 { font-size: 50px; color: #1e293b; margin-bottom: 15px; }
+        .section-title-layout p { font-size: 20px; color: #64748b; max-width: 800px; margin: 0 auto; }
+        .section-title-layout hr { background-color: #d97706; border: none; height: 4px; margin: 25px auto; width: 80px; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; width: 100%; }
+        .two-column.tiled > div { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; padding: 30px; }
+
+        .tiled-content { display: flex; gap: 30px; justify-content: center; width: 100%; }
+        .tile { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; flex: 1; padding: 25px; text-align: left; }
+        .tile .icon { color: #d97706; font-size: 36px; margin-bottom: 15px; }
+        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; }
+
+        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
+        .bullet-list li { margin-bottom: 15px; padding-left: 35px; position: relative; }
+        .bullet-list i { color: #d97706; font-size: 20px; left: 0; position: absolute; top: 3px; }
+
+        /* Table */
+        .table-layout table { border-collapse: collapse; width: 100%; background: #f8fafc; border-radius: 8px; overflow: hidden; }
+        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; font-size: 16px; }
+        .table-layout th { background-color: #d97706; color: #ffffff; font-family: 'Poppins', sans-serif; }
+
+        /* Timeline */
+        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; align-items: stretch; height: 100%; }
+        .timeline-line { background-color: #e2e8f0; height: 4px; left: 0; position: absolute; top: 50%; transform: translateY(-2px); width: 100%; z-index: 0; }
+        .timeline-item { position: relative; text-align: center; width: 23%; }
+        .timeline-item::after { background-color: #fff; border-radius: 50%; border: 4px solid #d97706; content: ''; height: 20px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; z-index: 1; }
+        .timeline-item .content-wrapper { left: 0; position: absolute; width: 100%; padding: 0 10px; }
+        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 20px; }
+        .timeline-item:nth-child(even) .content-wrapper { margin-top: 20px; top: 50%; }
+        .timeline-item h3 { color: #d97706; font-size: 20px; margin-bottom: 8px; }
+
+        /* Quote & Q&A */
+        .quote-layout { text-align: center; width: 85%; margin: 0 auto; }
+        .quote-layout blockquote { color: #1e293b; font-size: 36px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 20px 0; }
+        .quote-layout cite { color: #d97706; font-size: 20px; font-style: normal; font-weight: 700; }
+
+        .qa-layout { text-align: center; width: 100%; }
+        .qa-layout h2 { font-size: 64px; color: #1e293b; margin-bottom: 15px; }
+        .qa-layout p { font-size: 22px; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <h1>Transformasi Cerpen Menjadi Teks Prosedur<br>& Refleksi Akhir Bab</h1>
+        <p class="subtitle">Pertemuan 5: Elemen Menulis (Bagian 2) | Kurikulum Merdeka Bahasa Indonesia</p>
+    </div>
+</div>
+
+<!-- Slide 2: Section Title -->
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Pengantar & Fokus Pembelajaran</h2>
+        <p>Mengubah teks fiksi sastrawi menjadi teks instruksional nonfiksi secara objektif dan logis.</p>
+    </div>
+</div>
+
+<!-- Slide 3: Two Column Tiled Text (Tujuan Pembelajaran) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Capaian & Tujuan Pembelajaran 5</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Capaian Elemen Menulis</h3>
+                <p>Peserta didik mampu melakukan dekonstruksi teks fiksi (cerpen) untuk diekstrak menjadi panduan teknis berstandar objektif, serta melakukan penyuntingan sejawat (peer-review).</p>
+            </div>
+            <div>
+                <h3>Tujuan Spesifik Pertemuan 5</h3>
+                <p>1. Memahami teknik dekonstruksi cerita pendek.<br>2. Mengonversi narasi fiktif menjadi kalimat imperatif.<br>3. Menyelesaikan proyek akhir bab & refleksi materi.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Two Column Tiled Text (Hakikat Transformasi Teks) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Hakikat Transformasi Teks (Fiksi ke Nonfiksi)</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Dari Cerita Menjadi Panduan</h3>
+                <p>Karya sastra (cerpen) sering kali memuat aktivitas unik, seperti meracik obat, membuat kerajinan, atau memasak. Tugas kita adalah mengubah alur cerita tersebut menjadi teks prosedur yang sistematis.</p>
+            </div>
+            <div>
+                <h3>Perubahan Sudut Pandang Bahasa</h3>
+                <p>Bahasa naratif yang penuh emosi dan gaya sastra diubah menjadi bahasa objektif, lugas, berstruktur jelas, dan menggunakan kalimat perintah langsung.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Section Title -->
+<div class="slide-container" id="slide5">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian I: Dekonstruksi Teks Cerpen</h2>
+        <p>Membongkar alur cerita pendek untuk menemukan inti petunjuk atau aktivitas tersembunyi.</p>
+    </div>
+</div>
+
+<!-- Slide 6: Timeline (4 Tahap Dekonstruksi) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">4 Tahap Dekonstruksi Cerita Pendek</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>1. Membaca Kritis</h3>
+                    <p>Menemukan aktivitas atau trik yang dilakukan oleh tokoh cerita.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>2. Ekstraksi Bahan</h3>
+                    <p>Mendata alat dan bahan yang disebutkan tersirat dalam narasi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>3. Urutan Kronologis</h3>
+                    <p>Menyusun ulang kejadian cerita ke dalam tahapan kerja logis.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="content-wrapper">
+                    <h3>4. Konversi Bahasa</h3>
+                    <p>Mengganti kalimat cerita menjadi kalimat perintah imperatif.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Tiled Text with Icons (Mencari Aktivitas Tokoh) -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Menemukan Aktivitas & Trik Tokoh</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <h3>Deteksi Tindakan</h3>
+                <p>Perhatikan adegan ketika tokoh meracik, membuat, atau menyelesaikan masalah menggunakan benda di sekitarnya.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-list-check"></i></div>
+                <h3>Catat Rincian Tersirat</h3>
+                <p>Bahan-bahan dalam cerpen sering kali disebutkan secara puitis; pembaca harus mendaftarkannya secara riil.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-arrow-down-up-across-line"></i></div>
+                <h3>Pisahkan Alur Cerita</h3>
+                <p>Buang bagian dialog emosional atau konflik tokoh yang tidak berkaitan langsung dengan proses pembuatan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Section Title -->
+<div class="slide-container" id="slide8">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian II: Studi Kasus Konversi Cerpen</h2>
+        <p>Menganalisis petikan cerpen kakek meracik ramuan herbal tradisional.</p>
+    </div>
+</div>
+
+<!-- Slide 9: Two Column (Contoh Petikan Cerpen vs Hasil Prosedur) -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">Studi Kasus: Petikan Cerpen Ramuan Kakek</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Petikan Narasi Cerpen (Fiksi)</h3>
+                <p><em>"Kakek tersenyum sambil mengambil tiga lembar daun sirih di halaman belakang. Dengan sabar, ia menumbuknya bersama segenggam beras merah di dalam lesung batu kecil hingga halus, lalu menyeduhnya dengan air hangat kuman sebelum dioleskan..."</em></p>
+            </div>
+            <div>
+                <h3>Hasil Konversi Teks Prosedur</h3>
+                <p><strong>Cara Membuat Ramuan Herbal Tradisional:</strong><br>1. Siapkan 3 lembar daun sirih dan segenggam beras merah.<br>2. Masukkan bahan ke dalam lesung batu.<br>3. Tumbuk hingga halus.<br>4. Seduh dengan air hangat secukupnya.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Section Title -->
+<div class="slide-container" id="slide10">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian III: Konversi Bahasa & Tata Kalimat</h2>
+        <p>Transformasi gaya bahasa sastra menjadi gaya bahasa instruksional yang baku.</p>
+    </div>
+</div>
+
+<!-- Slide 11: Table (Tabel Konversi Bahasa) -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Tabel Perbandingan: Bahasa Sastra vs Prosedur</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspek Bahasa</th>
+                        <th>Kalimat dalam Cerpen (Fiksi)</th>
+                        <th>Konversi ke Teks Prosedur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bentuk Kalimat</strong></td>
+                        <td>"Kakek menuangkan air dengan penuh kehati-hatian ke cangkir."</td>
+                        <td>"Tuangkan air hangat secara perlahan ke dalam cangkir."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fokus Informasi</strong></td>
+                        <td>"Sinar matahari pagi menemani tangan renta yang mengaduk ramuan."</td>
+                        <td>"Aduk larutan selama 3 menit hingga merata."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Penggunaan Kata</strong></td>
+                        <td>Menggunakan banyak kiasan dan latar suasana emosional.</td>
+                        <td>Menggunakan kata kerja imperatif langsung & objektif.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Section Title -->
+<div class="slide-container" id="slide12">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Bagian IV: Penyuntingan & Penilaian Sejawat</h2>
+        <p>Mengevaluasi dan menyempurnakan hasil konversi teks bersama rekan kelompok.</p>
+    </div>
+</div>
+
+<!-- Slide 13: Styled Bullet Points (Peer-Review) -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">Proses Peer-Review (Penilaian Antar-Teman)</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-circle-check"></i><strong>Pertukaran Draf:</strong> Setiap kelompok menukar hasil konversi cerpen menjadi teks prosedur dengan kelompok lain.</li>
+                <li><i class="fa-solid fa-arrow-right"></i><strong>Pengecekan Struktur:</strong> Periksa apakah tujuan, bahan, langkah kronologis, dan penutup sudah lengkap.</li>
+                <li><i class="fa-solid fa-star"></i><strong>Koreksi Kaidah Bahasa:</strong> Pastikan tidak ada lagi kalimat naratif yang tersisa dan semua kalimat sudah berbentuk imperatif.</li>
+                <li><i class="fa-solid fa-thumbtack"></i><strong>Umpan Balik Konstruktif:</strong> Memberikan catatan perbaikan agar teks prosedur menjadi jauh lebih runut dan mudah dipahami.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Table (LKPD 5) -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">Lembar Kerja Kelompok (LKPD 5)</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tahapan Proyek</th>
+                        <th>Aktivitas Kelompok</th>
+                        <th>Target Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Pembacaan Cerpen</strong></td>
+                        <td>Membaca petikan cerpen pilihan guru dan menandai bagian aktivitas tokoh.</td>
+                        <td>Catatan gagasan aktivitas & bahan.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Penulisan Draf</strong></td>
+                        <td>Mengubah narasi cerita menjadi draf teks prosedur standar.</td>
+                        <td>Naskah awal teks prosedur.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Sunting & Finalisasi</strong></td>
+                        <td>Melakukan pengecekan struktur, kaidah bahasa, dan penyerahan akhir.</td>
+                        <td>Laporan teks prosedur final.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 15: Section Title -->
+<div class="slide-container" id="slide15">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Refleksi Menyeluruh Bab 2: Teks Prosedur</h2>
+        <p>Merangkum perjalanan belajar dari menyimak infografik hingga mentransformasi cerpen.</p>
+    </div>
+</div>
+
+<!-- Slide 16: Table (Peta Kompetensi Bab 2) -->
+<div class="slide-container" id="slide16">
+    <h2 class="slide-title">Peta Kompetensi Bab 2 (Pertemuan 1 s.d. 5)</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pertemuan</th>
+                        <th>Elemen & Fokus Materi</th>
+                        <th>Kompetensi Utama Tercapai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>P1 - P2</strong></td>
+                        <td>Menyimak Infografik & Struktur Teks</td>
+                        <td>Menganalisis arahan visual & membongkar struktur teks prosedur.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P3 - P4</strong></td>
+                        <td>Berbicara Wawancara & Menulis Poster/Esai</td>
+                        <td>Praktik wawancara profesional & menulis poster/esai prosedural.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P5</strong></td>
+                        <td>Transformasi Cerpen & Refleksi</td>
+                        <td>Mengonversi fiksi menjadi prosedur & penyuntingan akhir.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 17: Quote (Refleksi Akhir) -->
+<div class="slide-container" id="slide17">
+    <h2 class="slide-title">Refleksi Akhir Bab</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>"Teks prosedur mengajarkan kita bahwa kerumitan apa pun di dunia ini dapat diuraikan menjadi langkah-langkah sederhana yang teratur dan bermanfaat bagi sesama."</blockquote>
+            <cite>— Refleksi Akhir Bab 2 Bahasa Indonesia Kelas 9</cite>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 18: Full Background Image (Rangkuman Akhir) -->
+<div class="slide-container" id="slide18" style="background-image: linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)), url('https://placehold.co/1280x720/1e293b/ffffff?text=Selesai+Bab+2'); background-size: cover; background-position: center;">
+    <h2 class="slide-title">Pesan Penutup & Tindak Lanjut Pembelajaran</h2>
+    <div class="content-area">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            <p>1. Penguasaan teks prosedur membekali kita kemampuan berpikir logis dan sistematis.</p>
+            <p>2. Seluruh portofolio tugas (Infografik, Laporan Wawancara, Poster/Esai, dan Hasil Transformasi Cerpen) dikumpulkan untuk penilaian sumatif bab.</p>
+            <p>3. Siapkan diri untuk memasuki Bab 3 pada pertemuan berikutnya.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 19: Tiled Text with Icons (Ringkasan Manfaat) -->
+<div class="slide-container" id="slide19">
+    <h2 class="slide-title">Manfaat Menguasai Teks Prosedur</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Kejelasan Instruksi</h3>
+                <p>Menghindari kesalahpahaman dalam menyampaikan panduan kerja kepada orang lain.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3>Literasi Digital</h3>
+                <p>Mampu membaca dan memproduksi konten instruksional berbasis multimodal modern.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-brain"></i></div>
+                <h3>Berpikir Kritis</h3>
+                <p>Melatih ketelitian menganalisis urutan logis dan akibat dari sebuah tindakan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 20: Q&A -->
+<div class="slide-container" id="slide20">
+    <div class="qa-layout">
+        <h2>Tuntas Sudah Bab 2 Kita!</h2>
+        <p>Terima kasih atas dedikasi dan kerja sama luar biasa kalian selama rangkaian 5 pertemuan teks prosedur.</p>
+        <div style="margin-top: 40px; color: #d97706; font-weight: 700; font-size: 20px;">
+            Bahasa Indonesia Kelas 9 | Kurikulum Merdeka
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+```eof
+
+Your slide deck on Mengubah Petikan Cerpen Menjadi Teks Prosedur & Refleksi Akhir Bab (Pertemuan 5) is ready! Feel free to take a look and let me know if you'd like to make any edits.

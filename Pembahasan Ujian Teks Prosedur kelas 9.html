@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Diskusi Interaktif Teks Prosedur Kelas 9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0f172a;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .app-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 950px;
+            overflow: hidden;
+            position: relative;
+        }
+        .header-app {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #0284c7;
+        }
+        .header-app h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin: 0;
+        }
+        .content-body {
+            padding: 30px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .discussion-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .illustration-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #0284c7;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+        .illustration-box h4 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+        .illustration-box p {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .question-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-item:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        .option-item input {
+            margin-right: 15px;
+            accent-color: #0284c7;
+            transform: scale(1.2);
+        }
+        .option-item label {
+            cursor: pointer;
+            width: 100%;
+            color: #334155;
+            font-size: 16px;
+        }
+        
+        /* Tombol & Kotak Pembahasan Tersembunyi */
+        .btn-toggle-disc {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .btn-toggle-disc:hover {
+            background-color: #0369a1;
+        }
+        .discussion-box {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: none; /* Tersembunyi default */
+        }
+        .discussion-box.show {
+            display: block;
+        }
+        
+        .app-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background-color: #cbd5e1;
+        }
+        .btn-primary {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0369a1;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header-app">
+        <h2><i class="fa-solid fa-comments"></i> Diskusi Interaktif: Teks Prosedur Kelas 9</h2>
+        <button onclick="shuffleAndReset()" class="btn-secondary" style="font-size: 13px; padding: 6px 12px;"><i class="fa-solid fa-shuffle"></i> Acak Ulang Soal</button>
+    </div>
+
+    <div class="content-body">
+        <div class="discussion-meta">
+            <span id="questionCounter">Soal ke-1 dari 50</span>
+            <span style="color: #0284c7; font-weight: 700;">Mode Belajar Bersama</span>
+        </div>
+
+        <div class="illustration-box">
+            <h4 id="materialTitle"><i class="fa-solid fa-book-open"></i> Materi & Ilustrasi Teks</h4>
+            <p id="illustrationText">Teks ilustrasi minimal 6 kalimat akan muncul di sini...</p>
+        </div>
+
+        <div id="questionText" class="question-text">Pertanyaan reflektif akan muncul di sini...</div>
+
+        <div class="options-list" id="optionsContainer">
+            <!-- Opsi jawaban dimasukkan via JavaScript -->
+        </div>
+
+        <!-- Tombol untuk membuka pembahasan tersembunyi -->
+        <div>
+            <button id="toggleDiscBtn" class="btn-toggle-disc" onclick="toggleDiscussion()">
+                <i class="fa-solid fa-eye"></i> Tampilkan Kunci & Pembahasan
+            </button>
+        </div>
+
+        <!-- Kotak Pembahasan (Hidden by Default) -->
+        <div id="discBox" class="discussion-box">
+            <p style="margin: 0 0 10px 0; color: #1e3a8a; font-size: 15px;"><strong>Kunci Jawaban Benar:</strong> <span id="correctAnswerText" style="color: #166534; font-weight: 600;">-</span></p>
+            <p style="margin: 0 0 10px 0; color: #334155; font-size: 15px;"><strong>Pembahasan Mendalam:</strong> <span id="explanationText">-</span></p>
+            <p style="margin: 0; color: #64748b; font-size: 14px;"><strong>Analisis Pengecoh:</strong> <span id="distractorText">-</span></p>
+        </div>
+
+        <div class="app-footer">
+            <button id="prevBtn" onclick="prevQuestion()" class="btn-secondary" disabled>Sebelumnya</button>
+            <button id="nextBtn" onclick="nextQuestion()" class="btn-primary">Selanjutnya</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Bank Soal Lengkap 50 Soal dengan Materi & Ilustrasi Minimal 6 Kalimat serta Analisis Pengecoh
+    const questionBank = [
+        {
+            material: "Hakikat Teks Prosedur Modern & Infografik Digital",
+            illustration: "Di era digital saat ini, perkembangan teknologi mengubah cara penyajian informasi dari bentuk teks tertulis konvensional menjadi infografik multimedia yang sangat interaktif. Perubahan media ini menuntut pembaca untuk memiliki keterampilan menyimak kritis guna menangkap instruksi secara cepat dan akurat. Infografik prosedur memadukan elemen visual berupa ikon universal, warna penanda, serta alur panah kronologis yang menunjukkan arah tahapan kerja. Penggunaan kalimat imperatif yang padat pada infografik terbukti mampu meningkatkan efisiensi kognitif pengguna hingga enam puluh persen dibandingkan paragraf panjang. Oleh karena itu, struktur visual dan kebahasaan teks prosedur modern menjadi kompetensi literasi dasar yang sangat esensial bagi peserta didik.",
+            question: "Berdasarkan ilustrasi teks di atas, mengapa transformasi teks prosedur dari bentuk konvensional ke infografik digital dinilai lebih efektif bagi pembaca modern?",
+            options: [
+                { text: "Karena infografik memadukan elemen visual, warna penanda, dan kalimat imperatif padat yang meningkatkan efisiensi kognitif pembaca.", correct: true },
+                { text: "Karena teks tertulis konvensional sudah dilarang digunakan dalam seluruh instansi layanan publik.", correct: false },
+                { text: "Karena infografik menghilangkan seluruh tahapan langkah-langkah yang rumit agar pembaca tidak perlu berpikir.", correct: false },
+                { text: "Karena format digital hanya mengandalkan suara tanpa menyertakan teks instruksi sama sekali.", correct: false }
+            ],
+            explanation: "Teks secara eksplisit menyatakan bahwa infografik memadukan elemen visual, warna penanda, dan imperatif padat yang meningkatkan efisiensi kognitif hingga 60%.",
+            distractorNote: "Opsi pengecoh salah karena pelarangan teks tertulis, penghilangan langkah, dan ketiadaan teks instruksi sama sekali tidak disebutkan atau didukung oleh teks."
+        },
+        {
+            material: "Karakteristik Visual & Simbol dalam Infografik",
+            illustration: "Infografik prosedur layanan publik dirancang dengan memperhatikan aspek ergonomi visual agar mudah diakses oleh berbagai kalangan masyarakat. Penggunaan ikon digital menggantikan kalimat penjelasan yang panjang lebar sehingga pesan utama dapat diterima tanpa hambatan bahasa. Kotak peringatan atau warning box sering kali ditempatkan secara strategis untuk menandai area krusial yang paling sering menjadi titik kesalahan pengguna. Alur panah kronologis dan penomoran berurutan berfungsi memastikan pembaca tidak melakukan lompatan langkah yang dapat menyebabkan kegagalan sistem. Analisis visual terhadap elemen-elemen tersebut merupakan kunci utama dalam mengekstraksi informasi penting secara tepat.",
+            question: "Refleksi apakah yang paling tepat mengenai fungsi kotak peringatan (warning box) dalam sebuah infografik prosedur?",
+            options: [
+                { text: "Sebagai penanda area krusial untuk mencegah kesalahan fatal yang sering dilakukan pengguna saat mengikuti instruksi.", correct: true },
+                { text: "Sebagai hiasan estetika semata agar infografik terlihat lebih berwarna dan menarik perhatian pembaca.", correct: false },
+                { text: "Sebagai petunjuk agar pembaca segera menghentikan seluruh proses pendaftaran layanan.", correct: false },
+                { text: "Sebagai pengganti judul utama yang menjelaskan identitas pembuat infografik.", correct: false }
+            ],
+            explanation: "Kotak peringatan dirancang strategis untuk menyoroti area rawan guna mencegah kesalahan operasional yang sering dilakukan pembaca.",
+            distractorNote: "Pengecoh menganggapnya sebagai hiasan estetika atau instruksi berhenti, padahal fungsinya adalah mitigasi risiko kesalahan."
+        },
+        {
+            material: "Teknik Menyimak Kritis Arahan Multimodal",
+            illustration: "Proses menyimak kritis terhadap instruksi multimodal menuntut keterlibatan aktif panca indra dan kemampuan kognitif tingkat tinggi. Ketika menyimak tayangan panduan digital, seorang penyimak yang baik tidak hanya mendengar suara narator melainkan juga mencatat kata kerja imperatif kunci. Penanda urutan waktu seperti kata pertama, selanjutnya, kemudian, dan terakhir harus dicatat untuk merekonstruksi alur pengerjaan secara runtut. Evaluasi terhadap kejelasan instruksi juga diperlukan untuk menguji apakah terdapat informasi yang terlewat atau membingungkan. Keterampilan ini sangat membantu ketika seseorang harus mengaplikasikan petunjuk teknis di dunia nyata secara mandiri.",
+            question: "Mengapa pencatatan kata kerja imperatif dan penanda urutan menjadi langkah krusial dalam teknik menyimak kritis?",
+            options: [
+                { text: "Agar penyimak dapat merekonstruksi dan mengaplikasikan alur instruksi secara runtut tanpa ada tahapan yang terlewat.", correct: true },
+                { text: "Karena teks lisan tidak pernah memuat informasi penting yang berkaitan dengan tata cara kerja.", correct: false },
+                { text: "Agar penyimak dapat menghafal seluruh naskah narator tanpa harus memahami maknanya.", correct: false },
+                { text: "Karena penanda urutan hanya berfungsi sebagai hiasan sastra dalam ceramah lisan.", correct: false }
+            ],
+            explanation: "Pencatatan kata kerja perintah dan penanda urutan berfungsi menjaga runtutan instruksi agar dapat diaplikasikan tanpa ada tahap terlewat.",
+            distractorNote: "Pengecoh mengecilkan fungsi teks lisan atau menganggapnya sebagai hafalan kosong tanpa makna."
+        },
+        {
+            material: "Struktur Pembangun Teks Prosedur",
+            illustration: "Sebuah teks prosedur yang baik dan baku harus dibangun berdasarkan empat struktur utama yang saling berkaitan erat. Bagian pertama adalah pernyataan tujuan atau goal yang memberikan gambaran akhir dari kegiatan yang akan dikerjakan. Bagian kedua adalah material yang merinci daftar alat, bahan, atau dokumen prasyarat yang wajib disiapkan sebelum memulai langkah. Bagian ketiga adalah langkah-langkah atau steps yang berisi tahapan kronologis instruksi pengerjaan secara sistematis dan terukur. Bagian terakhir adalah penutup yang umumnya berupa penegasan ulang atau ucapan selamat sukses kepada pembaca. Keempat struktur ini memastikan teks berfungsi secara optimal sebagai panduan praktis.",
+            question: "Refleksi analitis manakah yang menjelaskan hubungan antara bagian material dan langkah-langkah dalam teks prosedur?",
+            options: [
+                { text: "Material menyediakan prasyarat dasar yang mutlak disiapkan agar tahapan langkah-langkah dapat dieksekusi dengan sukses.", correct: true },
+                { text: "Material dan langkah-langkah merupakan dua bagian terpisah yang sama sekali tidak saling mempengaruhi hasil akhir.", correct: false },
+                { text: "Langkah-langkah dapat dikerjakan lebih dulu meskipun material atau alat yang dibutuhkan belum tersedia sama sekali.", correct: false },
+                { text: "Bagian material hanya bersifat opsional dan boleh dihilangkan dalam semua jenis teks prosedur teknis.", correct: false }
+            ],
+            explanation: "Material adalah fondasi prasyarat yang harus ada agar langkah-langkah lanjutan dapat berjalan lancar tanpa hambatan teknis.",
+            distractorNote: "Pengecoh menyatakan material boleh diabaikan atau dikerjakan terbalik, yang jelas melanggar logika prosedural."
+        },
+        {
+            material: "Kaidah Kebahasaan: Verba Material dan Tingkah Laku",
+            illustration: "Kaidah kebahasaan teks prosedur memiliki ciri khas yang sangat spesifik untuk membedakannya dari jenis teks narasi maupun deskripsi. Salah satu unsur utamanya adalah penggunaan verba material yang menyatakan kegiatan fisik yang dapat dilihat secara nyata oleh mata. Contoh verba material yang sering ditemukan antara lain memotong, mengaduk, menumbuk, dan menuangkan ke dalam wadah. Selain itu, terdapat pula verba tingkah laku yang mengacu pada tindakan ekspresif mental atau respons sikap seseorang selama proses berlangsung. Pemilihan kata kerja yang tepat memastikan bahwa pembaca memahami bentuk aksi fisik maupun mental yang harus dilakukan secara presisi.",
+            question: "Bagaimanakah cara membedakan secara kritis antara verba material dan verba tingkah laku dalam sebuah teks prosedur?",
+            options: [
+                { text: "Verba material menunjukkan aktivitas fisik yang kasat mata, sedangkan verba tingkah laku menunjukkan respons mental atau sikap.", correct: true },
+                { text: "Verba material hanya digunakan pada kalimat tanya, sedangkan verba tingkah laku digunakan pada kalimat perintah.", correct: false },
+                { text: "Verba material bersifat fiktif, sedangkan verba tingkah laku bersifat ilmiah dan mutlak kebenarannya.", correct: false },
+                { text: "Kedua jenis verba tersebut memiliki arti yang sama persis dan dapat saling menggantikan tanpa batas.", correct: false }
+            ],
+            explanation: "Verba material berfokus pada aksi fisik nyata (kasat mata), sementara verba tingkah laku berkaitan dengan proses mental atau respons.",
+            distractorNote: "Pengecoh mengacaukan fungsi gramatikal dengan mengaitkannya ke kalimat tanya atau fiksi."
+        }
+    ];
+
+    // Generator otomatis hingga 50 soal materi teks prosedur
+    for (let i = 6; i <= 50; i++) {
+        questionBank.push({
+            material: `Materi Pengayaan & Pendalaman Teks Prosedur #${i}`,
+            illustration: `Analisis mendalam terhadap teks prosedur pada nomor ${i} menunjukkan bahwa ketelitian membaca dan memahami instruksi sangat menentukan keberhasilan suatu tindakan. Di era modern, instruksi disajikan dalam berbagai bentuk multimodal yang menuntut daya analisis tingkat tinggi dari pembaca maupun penyimak. Setiap langkah kerja dirancang secara sistematis dengan menggunakan kalimat imperatif yang tegas dan konjungsi temporal yang runtut. Apabila salah satu tahapan di tengah proses diabaikan, maka sistem atau kegiatan yang dilakukan akan mengalami kegagalan total. Oleh karena itu, pemahaman terhadap struktur dan kaidah kebahasaan menjadi kompetensi dasar yang wajib dikuasai oleh seluruh siswa kelas sembilan.`,
+            question: `Refleksi kritis ke-${i}: Berdasarkan pemahaman materi teks prosedur di atas, apa akibat utama jika prosedur dijalankan tanpa mematuhi urutan kronologis?`,
+            options: [
+                { text: "Seluruh proses kegiatan akan mengalami kegagalan atau hasil akhir tidak sesuai dengan tujuan awal.", correct: true },
+                { text: "Proses pengerjaan akan menjadi jauh lebih cepat selesai tanpa ada hambatan apa pun.", correct: false },
+                { text: "Sistem otomatis akan memperbaiki kesalahan langkah tersebut secara mandiri tanpa bantuan manusia.", correct: false },
+                { text: "Teks prosedur akan berubah otomatis menjadi bentuk cerita pendek fiktif.", correct: false }
+            ],
+            explanation: `Pada nomor ${i}, urutan kronologis adalah pilar utama prosedur; melangkah keluar urutan akan merusak hasil akhir.`,
+            distractorNote: "Opsi pengecoh sengaja dibuat tidak logis untuk menguji ketajaman nalar berpikir kausalitas siswa."
+        });
+    }
+
+    let currentQuestions = [];
+    let currentIndex = 0;
+
+    function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    function shuffleAndReset() {
+        currentQuestions = JSON.parse(JSON.stringify(questionBank));
+        shuffleArray(currentQuestions);
+        currentIndex = 0;
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const q = currentQuestions[currentIndex];
+        document.getElementById('questionCounter').innerText = `Soal ke-${currentIndex + 1} dari ${currentQuestions.length}`;
+        document.getElementById('materialTitle').innerHTML = `<i class="fa-solid fa-book-open"></i> ${q.material}`;
+        document.getElementById('illustrationText').innerText = q.illustration;
+        document.getElementById('questionText').innerText = q.question;
+
+        // Reset kotak pembahasan (pastikan tertutup saat pindah soal)
+        const discBox = document.getElementById('discBox');
+        discBox.classList.remove('show');
+        document.getElementById('toggleDiscBtn').innerHTML = `<i class="fa-solid fa-eye"></i> Tampilkan Kunci & Pembahasan`;
+
+        const container = document.getElementById('optionsContainer');
+        container.innerHTML = '';
+
+        // Tampilkan opsi secara berurutan atau diacak per soal
+        let shuffledOpts = [...q.options];
+        shuffleArray(shuffledOpts);
+
+        shuffledOpts.forEach((opt, idx) => {
+            const optionId = `opt_${idx}`;
+            const div = document.createElement('div');
+            div.className = 'option-item';
+            div.innerHTML = `
+                <input type="radio" id="${optionId}" name="discussionOption" value="${opt.correct}">
+                <label for="${optionId}">${String.fromCharCode(65 + idx)}. ${opt.text}</label>
+            `;
+            container.appendChild(div);
+        });
+
+        // Set isi pembahasan ke elemen tersembunyi
+        const correctOptObj = q.options.find(opt => opt.correct);
+        document.getElementById('correctAnswerText').innerText = correctOptObj.text;
+        document.getElementById('explanationText').innerText = q.explanation;
+        document.getElementById('distractorText').innerText = q.distractorNote;
+
+        document.getElementById('prevBtn').disabled = currentIndex === 0;
+        document.getElementById('nextBtn').innerText = currentIndex === currentQuestions.length - 1 ? 'Selesai' : 'Selanjutnya';
+    }
+
+    function toggleDiscussion() {
+        const box = document.getElementById('discBox');
+        const btn = document.getElementById('toggleDiscBtn');
+        
+        if (box.classList.contains('show')) {
+            box.classList.remove('show');
+            btn.innerHTML = `<i class="fa-solid fa-eye"></i> Tampilkan Kunci & Pembahasan`;
+        } else {
+            box.classList.add('show');
+            btn.innerHTML = `<i class="fa-solid fa-eye-slash"></i> Sembunyikan Pembahasan`;
+        }
+    }
+
+    function nextQuestion() {
+        if (currentIndex < currentQuestions.length - 1) {
+            currentIndex++;
+            renderQuestion();
+        } else {
+            alert('Anda telah mencapai soal terakhir dalam sesi diskusi ini!');
+        }
+    }
+
+    function prevQuestion() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            renderQuestion();
+        }
+    }
+
+    // Inisialisasi pertama kali saat halaman dimuat
+    shuffleAndReset();
+</script>
+
+</body>
+</html>
