@@ -1,458 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Struktur & Kaidah Kebahasaan Teks Prosedur</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Pertemuan 2: Fungsi, Anatomi, & Kebahasaan Teks Prosedur</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #27ae60;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --danger: #e74c3c;
+        }
+        
         * { box-sizing: border-box; }
+
         body {
-            background-color: #0f172a;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: 1fr;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
-            min-height: 100vh;
-            padding: 20px 0;
-            place-items: center;
+            padding: 15px; 
         }
-        .slide-container {
-            align-items: center;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            font-family: 'Lato', sans-serif;
-            height: 720px;
-            justify-content: center;
-            overflow: hidden;
-            padding: 50px;
-            position: relative;
-            width: 1280px;
+
+        .container {
+            max-width: 800px; 
+            width: 100%;      
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .slide-container::before {
-            content: '';
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            color: var(--primary);
+            margin: 0 0 5px 0;
+            font-size: 1.8em;
+        }
+
+        h2 {
+            color: var(--secondary);
+            border-left: 4px solid var(--secondary);
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+
+        h3 { color: var(--primary); }
+
+        .featured-image {
             width: 100%;
-            z-index: 0;
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent 50%);
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+
+        .tujuan-box {
+            background-color: #e8f8f5;
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .materi-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .materi-box ul, .materi-box ol {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .materi-box li { margin-bottom: 15px; }
+
+        .teks-kasus {
+            background-color: #fce4ec;
+            border-left: 5px solid var(--danger);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        .teks-kasus ol {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
         
-        /* Typography */
-        h1, h2, h3 { color: #1e293b; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
-        p, li { color: #475569; font-family: 'Lato', sans-serif; font-size: 18px; line-height: 1.5; margin: 0; }
-        
-        .slide-title { font-size: 38px; font-weight: 700; margin-bottom: 30px; text-align: left; width: 100%; color: #0f172a; border-bottom: 3px solid #2563eb; padding-bottom: 10px; }
-        .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
+        .teks-kasus li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px dashed #f06292;
+        }
 
-        /* Layouts */
-        .title-layout { text-align: center; }
-        .title-layout h1 { font-size: 52px; color: #0f172a; margin-bottom: 20px; line-height: 1.2; }
-        .title-layout .subtitle { font-size: 22px; color: #2563eb; font-weight: 600; max-width: 900px; margin: 0 auto; }
+        .misi-box {
+            background-color: #e3f2fd;
+            border: 1px solid #90caf9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
 
-        .section-title-layout { text-align: center; }
-        .section-title-layout h2 { font-size: 50px; color: #1e293b; margin-bottom: 15px; }
-        .section-title-layout p { font-size: 20px; color: #64748b; max-width: 800px; margin: 0 auto; }
-        .section-title-layout hr { background-color: #2563eb; border: none; height: 4px; margin: 25px auto; width: 80px; }
+        .table-responsive {
+            overflow-x: auto;
+            width: 100%;
+        }
 
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; width: 100%; }
-        .two-column.tiled > div { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; padding: 30px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            min-width: 500px; 
+        }
 
-        .tiled-content { display: flex; gap: 30px; justify-content: center; width: 100%; }
-        .tile { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; flex: 1; padding: 25px; text-align: left; }
-        .tile .icon { color: #2563eb; font-size: 36px; margin-bottom: 15px; }
-        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
 
-        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
-        .bullet-list li { margin-bottom: 15px; padding-left: 35px; position: relative; }
-        .bullet-list i { color: #2563eb; font-size: 20px; left: 0; position: absolute; top: 3px; }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
 
-        /* Table */
-        .table-layout table { border-collapse: collapse; width: 100%; background: #f8fafc; border-radius: 8px; overflow: hidden; }
-        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; font-size: 16px; }
-        .table-layout th { background-color: #2563eb; color: #ffffff; font-family: 'Poppins', sans-serif; }
+        .btn-nav {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            font-weight: bold;
+        }
 
-        /* Timeline */
-        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; align-items: stretch; height: 100%; }
-        .timeline-line { background-color: #e2e8f0; height: 4px; left: 0; position: absolute; top: 50%; transform: translateY(-2px); width: 100%; z-index: 0; }
-        .timeline-item { position: relative; text-align: center; width: 23%; }
-        .timeline-item::after { background-color: #fff; border-radius: 50%; border: 4px solid #2563eb; content: ''; height: 20px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; z-index: 1; }
-        .timeline-item .content-wrapper { left: 0; position: absolute; width: 100%; padding: 0 10px; }
-        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 20px; }
-        .timeline-item:nth-child(even) .content-wrapper { margin-top: 20px; top: 50%; }
-        .timeline-item h3 { color: #2563eb; font-size: 20px; margin-bottom: 8px; }
+        .btn-nav:hover { background-color: #1a252f; }
 
-        /* Quote & Q&A */
-        .quote-layout { text-align: center; width: 85%; margin: 0 auto; }
-        .quote-layout blockquote { color: #1e293b; font-size: 36px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 20px 0; }
-        .quote-layout cite { color: #2563eb; font-size: 20px; font-style: normal; font-weight: 700; }
-
-        .qa-layout { text-align: center; width: 100%; }
-        .qa-layout h2 { font-size: 64px; color: #1e293b; margin-bottom: 15px; }
-        .qa-layout p { font-size: 22px; color: #64748b; }
+        @media screen and (max-width: 480px) {
+            header h1 { font-size: 1.5em; }
+            h2 { font-size: 1.2em; }
+            body { padding: 10px; }
+            .container { padding: 15px; }
+        }
     </style>
 </head>
 <body>
 
-<!-- Slide 1: Title Slide -->
-<div class="slide-container" id="slide1">
-    <div class="title-layout">
-        <h1>Struktur & Kaidah Kebahasaan<br>Teks Prosedur</h1>
-        <p class="subtitle">Pertemuan 2: Elemen Membaca & Memirsa | Kurikulum Merdeka Bahasa Indonesia</p>
-    </div>
-</div>
+    <div class="container">
+        <header>
+            <h1>Pertemuan 2</h1>
+            <p>Fungsi, Anatomi, & Unsur Kebahasaan Teks Prosedur</p>
+        </header>
 
-<!-- Slide 2: Section Title -->
-<div class="slide-container" id="slide2">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Pengantar & Fokus Pembelajaran</h2>
-        <p>Membedah anatomi teks prosedur dan aturan kebahasaan yang membangun teks panduan.</p>
-    </div>
-</div>
+        <section class="tujuan-pembelajaran">
+            <div class="tujuan-box">
+                <h3>🎯 Tujuan Pembelajaran</h3>
+                <ul>
+                    <li>Peserta didik mampu mengidentifikasi struktur/anatomi teks prosedur dengan tepat.</li>
+                    <li>Peserta didik mampu menelaah unsur kebahasaan yang menjadi ciri khas teks prosedur.</li>
+                    <li>Peserta didik mampu menyusun ulang kerangka teks prosedur yang rumpang atau acak menjadi instruksi yang logis dan kohesif.</li>
+                </ul>
+            </div>
+        </section>
 
-<!-- Slide 3: Two Column Tiled Text (Tujuan Pembelajaran) -->
-<div class="slide-container" id="slide3">
-    <h2 class="slide-title">Capaian & Tujuan Pembelajaran 2</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Capaian Elemen Membaca & Memirsa</h3>
-                <p>Peserta didik mampu mengevaluasi informasi, menganalisis struktur pembangun, serta mengidentifikasi kaidah kebahasaan khusus dalam teks prosedur secara kritis dan cermat.</p>
-            </div>
-            <div>
-                <h3>Tujuan Spesifik Pertemuan 2</h3>
-                <p>1. Memahami 4 bagian utama struktur teks prosedur.<br>2. Menguasai kaidah kebahasaan (verba, kalimat imperatif, konjungsi).<br>3. Menganalisis teks prosedur nyata secara kelompok.</p>
-            </div>
-        </div>
-    </div>
-</div>
+        <section class="materi-inti">
+            <h2>A. Membongkar Anatomi Teks Prosedur</h2>
+            <p>Sebuah teks prosedur tidak diciptakan secara sembarangan. Agar pembaca dapat mengikuti instruksi dengan akurat tanpa mengalami kebingungan, teks ini harus dibangun di atas fondasi struktur yang logis dan sistematis.</p>
+            
+            <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80" alt="Ilustrasi Perencanaan dan Struktur" class="featured-image">
 
-<!-- Slide 4: Two Column Tiled Text (Hakikat Struktur) -->
-<div class="slide-container" id="slide4">
-    <h2 class="slide-title">Mengapa Struktur Teks Prosedur Penting?</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Kerangka Logis</h3>
-                <p>Struktur berfungsi sebagai peta penuntun agar informasi yang disampaikan tidak melompat-lompat dan mudah dipahami pembaca dari awal hingga akhir.</p>
+            <div class="materi-box">
+                <h3>4 Bagian Utama Anatomi Teks Prosedur:</h3>
+                <ol>
+                    <li>
+                        <strong>Tujuan (Pengantar):</strong> 
+                        Berfungsi sebagai paragraf pembuka yang menjelaskan sasaran akhir atau alasan mengapa petunjuk tersebut dibuat. Bagian ini memberikan gambaran kepada pembaca mengenai hasil akhir yang akan dicapai.
+                    </li>
+                    <li>
+                        <strong>Material / Bahan & Alat:</strong> 
+                        Memuat rincian benda, bahan mentah, atau peralatan pendukung yang wajib disiapkan sebelum memulai proses. Bagian ini sangat krusial agar tidak ada tahapan yang terhambat akibat kekurangan instrumen kerja.
+                    </li>
+                    <li>
+                        <strong>Langkah-Langkah (Instruksi Inti):</strong> 
+                        Merupakan inti dari teks prosedur yang disajikan secara berurutan kronologis. Tahapan di bagian ini tidak boleh dibolak-balik; kesalahan urutan dapat menyebabkan kegagalan hasil.
+                    </li>
+                    <li>
+                        <strong>Penegasan Ulang (Penutup):</strong> 
+                        Bagian opsional yang berisi kesimpulan, ucapan selamat, apresiasi, atau penekanan kembali atas manfaat jika prosedur dilakukan dengan benar.
+                    </li>
+                </ol>
             </div>
-            <div>
-                <h3>Standar Baku Penulisan</h3>
-                <p>Sebuah teks prosedur yang valid harus memiliki kejelasan tujuan, ketersediaan material/alat, tahapan kerja runut, dan penutup/simpulan.</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Slide 5: Section Title -->
-<div class="slide-container" id="slide5">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Struktur Teks Prosedur (4 Bagian Utama)</h2>
-        <p>Mengenal anatomi lengkap dari bagian pendahuluan hingga penutup.</p>
-    </div>
-</div>
+            <h2>B. Kaidah Kebahasaan Teks Prosedur Detil</h2>
+            <p>Selain struktur, teks prosedur memiliki "gaya bahasa" khusus yang membedakannya dengan teks cerita atau deskripsi. Berikut adalah unsur kebahasaan yang wajib ada:</p>
+            
+            <div class="materi-box">
+                <ul>
+                    <li><strong>Kalimat Imperatif (Perintah):</strong> Kalimat yang berfungsi meminta atau melarang pembaca melakukan sesuatu. Ciri khasnya sering menggunakan partikel <em>-lah</em> atau <em>-kan</em>. <br><em>Contoh: Tuangkanlah, Masukkan, Jangan diaduk, Pastikan.</em></li>
+                    <li><strong>Verba Material:</strong> Kata kerja yang menunjukkan tindakan fisik atau perbuatan yang bisa dilihat secara nyata. <br><em>Contoh: Memotong, Mengaduk, Menggosok, Menyiram.</em></li>
+                    <li><strong>Konjungsi Temporal (Kata Hubung Waktu):</strong> Kata hubung yang berfungsi menyusun urutan langkah secara kronologis agar instruksi mengalir dengan jelas. <br><em>Contoh: Pertama-tama, Selanjutnya, Kemudian, Setelah itu, Terakhir.</em></li>
+                    <li><strong>Keterangan Alat, Cara, dan Tujuan:</strong> Memberikan batasan atau rincian yang presisi agar pembaca tidak salah mengambil tindakan. <br><em>Contoh: Iris bawang <strong>dengan pisau tajam</strong> (Alat), Aduk adonan <strong>secara perlahan</strong> (Cara), Rebus air <strong>agar kuman mati</strong> (Tujuan).</em></li>
+                </ul>
+            </div>
+        </section>
 
-<!-- Slide 6: Timeline (4 Bagian Struktur) -->
-<div class="slide-container" id="slide6">
-    <h2 class="slide-title">Anatomi 4 Bagian Struktur Teks Prosedur</h2>
-    <div class="content-area">
-        <div class="timeline-layout">
-            <div class="timeline-line"></div>
-            <div class="timeline-item">
-                <div class="content-wrapper">
-                    <h3>1. Tujuan</h3>
-                    <p>Pengantar atau hasil akhir yang ingin dicapai dari pembuatan/kegiatan.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="content-wrapper">
-                    <h3>2. Material</h3>
-                    <p>Rincian alat, bahan, atau syarat yang wajib disiapkan sebelumnya.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="content-wrapper">
-                    <h3>3. Langkah-langkah</h3>
-                    <p>Tahapan kronologis instruksi pengerjaan secara sistematis.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="content-wrapper">
-                    <h3>4. Penutup</h3>
-                    <p>Kesimpulan, penegasan ulang, atau ucapan selamat mencoba.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <section class="tugas-lkpd">
+            <h2>LKPD Kelompok: Detektif Struktur!</h2>
+            <p>Setelah memahami anatomi dan kaidah kebahasaannya, mari uji ketajaman analisis kelompok kalian. Di bawah ini terdapat draf teks prosedur berjudul <strong>"Cara Cepat Menghilangkan Noda Tinta di Seragam"</strong> yang sengaja dikacaukan urutannya, dan ada satu struktur penting yang dihilangkan oleh penulisnya!</p>
 
-<!-- Slide 7: Tiled Text with Icons (Struktur 1 & 2) -->
-<div class="slide-container" id="slide7">
-    <h2 class="slide-title">Rincian Struktur: Tujuan & Material</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
-                <h3>Pernyataan Tujuan (Goal)</h3>
-                <p>Biasanya diletakkan di judul atau paragraf pembuka. Menginformasikan apa yang akan dibuat atau diselesaikan oleh pembaca.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
-                <h3>Material (Alat & Bahan)</h3>
-                <p>Berisi daftar komponen fisik, takaran, ukuran, atau dokumen pendukung yang bersifat opsional pada prosedur protokol namun wajib pada resep/tips.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-list-ol"></i></div>
-                <h3>Sifat Urutan</h3>
-                <p>Material disusun secara rinci untuk mencegah kegagalan pada tahap eksekusi instruksi selanjutnya.</p>
-            </div>
-        </div>
-    </div>
-</div>
+            <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=800&q=80" alt="Ilustrasi Noda pada Pakaian" class="featured-image">
 
-<!-- Slide 8: Tiled Text with Icons (Struktur 3 & 4) -->
-<div class="slide-container" id="slide8">
-    <h2 class="slide-title">Rincian Struktur: Langkah-Langkah & Penutup</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-shoe-prints"></i></div>
-                <h3>Langkah-langkah (Steps)</h3>
-                <p>Inti utama teks prosedur. Disusun urut (nomor atau huruf) dari tahap pertama hingga akhir tanpa ada tahapan yang terlewat.</p>
+            <div class="teks-kasus">
+                <h3>Draf Acak (Belum Sempurna)</h3>
+                <ol type="A">
+                    <li>Gosok perlahan bagian yang terkena noda menggunakan sikat gigi bekas sampai warna tinta mulai memudar.</li>
+                    <li>Siapkan bahan: cuka putih, sabun cuci piring, air hangat, dan sikat gigi bekas.</li>
+                    <li>Dengan trik ini, seragam sekolahmu akan kembali bersih bersinar tanpa bekas noda tinta. Selamat mencoba di rumah!</li>
+                    <li>Setelah digosok, diamkan selama 10 hingga 15 menit agar campuran meresap dan mengangkat sisa tinta dari serat kain.</li>
+                    <li>Campurkan satu sendok makan cuka putih dan setengah sendok teh sabun cuci piring ke dalam mangkuk kecil.</li>
+                    <li>Tuangkan campuran cair tersebut tepat menutupi area noda tinta pada seragam.</li>
+                    <li>Terakhir, bilas seragam dengan air hangat dan cuci seperti biasa menggunakan detergen.</li>
+                </ol>
             </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-flag-checkered"></i></div>
-                <h3>Penutup (Reiteration)</h3>
-                <p>Kalimat pengingat atau ucapan sukses di bagian akhir teks untuk memberikan apresiasi kepada pembaca.</p>
+
+            <div class="misi-box">
+                <h3>Instruksi Kerja Kelompok</h3>
+                <p>Diskusikan bersama rekan sekelompokmu dan selesaikan 3 misi investigasi berikut:</p>
+                <ol>
+                    <li><strong>Misi 1:</strong> Susun ulang urutan abjad (A-G) di atas agar membentuk urutan langkah kerja yang logis dan benar.</li>
+                    <li><strong>Misi 2:</strong> Analisis strukturnya. Manakah dari 4 Anatomi Teks Prosedur yang <strong>HILANG</strong> dari draf acak tersebut?</li>
+                    <li><strong>Misi 3:</strong> Bertindaklah sebagai penulis! Ciptakan 1 paragraf buatan kelompokmu sendiri untuk melengkapi struktur yang hilang tersebut, pastikan paragraf buatan kalian sesuai dengan unsur kebahasaannya.</li>
+                </ol>
             </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-                <h3>Catatan Tambahan</h3>
-                <p>Sering kali diselipkan tips opsional atau peringatan kecil di sela-sela langkah.</p>
+
+            <h3>Format Laporan Analisis Kelompok</h3>
+            <p>Salin tabel di bawah ini ke buku tugas atau lembar kerja kelompok, lalu masukkan hasil susunan kalian beserta paragraf tambahan yang telah dibuat!</p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Struktur Teks</th>
+                            <th style="width: 70%;">Hasil Analisis & Susunan Kelompok</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tujuan</strong></td>
+                            <td><em>(Tuliskan paragraf pengantar buatan kelompok kalian di sini untuk melengkapi struktur yang hilang)</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Material / Bahan</strong></td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Langkah-langkah</strong></td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penegasan Ulang</strong></td>
+                            <td>...</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
-</div>
+        </section>
 
-<!-- Slide 9: Section Title -->
-<div class="slide-container" id="slide9">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Kaidah Kebahasaan Teks Prosedur</h2>
-        <p>Memahami ciri khas bahasa yang membangun teks instruksional.</p>
-    </div>
-</div>
+        <a href="index.html" class="btn-nav">⬅️ Kembali ke Menu Utama</a>
 
-<!-- Slide 10: Tiled Text with Icons (Jenis Kalimat) -->
-<div class="slide-container" id="slide10">
-    <h2 class="slide-title">Kaidah Kebahasaan: Jenis Kalimat</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-                <h3>Kalimat Imperatif</h3>
-                <p>Kalimat perintah yang mengandung makna meminta atau menyuruh pembaca melakukan sesuatu (cth: <em>Potonglah, Masukkan, Pastikan</em>).</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-circle-info"></i></div>
-                <h3>Kalimat Deklaratif</h3>
-                <p>Kalimat yang berisi pernyataan atau pemberi informasi fakta kepada pembaca (cth: <em>Daun sirih memiliki banyak khasiat obat</em>).</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
-                <h3>Kalimat Interogatif</h3>
-                <p>Kalimat yang berisi pertanyaan untuk memancing keaktifan atau konfirmasi (cth: <em>Sudahkah lemari pendingin dibersihkan?</em>).</p>
-            </div>
-        </div>
     </div>
-</div>
-
-<!-- Slide 11: Two Column (Verba dalam Teks Prosedur) -->
-<div class="slide-container" id="slide11">
-    <h2 class="slide-title">Kaidah Kebahasaan: Penggunaan Verba (Kata Kerja)</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Verba Material</h3>
-                <p>Kata kerja yang mengacu pada tindakan fisik yang dapat dilihat secara nyata oleh mata.<br><em>Contoh: Memotong, mengaduk, menumbuk, menuangkan, merajang.</em></p>
-            </div>
-            <div>
-                <h3>Verba Tingkah Laku</h3>
-                <p>Kata kerja yang mengacu pada tindakan ekspresi mental atau respons sikap.<br><em>Contoh: Memahami, menunggu, meyakini, menikmati, bersabar.</em></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 12: Two Column (Konjungsi & Adverbia) -->
-<div class="slide-container" id="slide12">
-    <h2 class="slide-title">Kaidah Kebahasaan: Konjungsi & Adverbia</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Konjungsi Temporal (Urutan)</h3>
-                <p>Kata hubung waktu untuk menandai urutan pengerjaan.<br><em>Contoh: Pertama, berikutnya, selanjutnya, kemudian, setelah itu, terakhir.</em></p>
-            </div>
-            <div>
-                <h3>Adverbia (Kata Keterangan)</h3>
-                <p>Keterangan waktu, tempat, atau cara agar instruksi lebih rinci.<br><em>Contoh: Selama 5 menit, secara perlahan, di dalam wadah kedap udara.</em></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 13: Section Title -->
-<div class="slide-container" id="slide13">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Analisis Contoh Teks Prosedur Nyata</h2>
-        <p>Menerapkan teori struktur dan kaidah kebahasaan pada teks autentik.</p>
-    </div>
-</div>
-
-<!-- Slide 14: Table (Analisis Teks Prosedur) -->
-<div class="slide-container" id="slide14">
-    <h2 class="slide-title">Tabel Bedah Teks: "Cara Mencuci Tangan yang Benar"</h2>
-    <div class="content-area">
-        <div class="table-layout">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bagian Struktur</th>
-                        <th>Contoh Kutipan Kalimat Teks</th>
-                        <th>Kaidah Bahasa Menonjol</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Tujuan</strong></td>
-                        <td>"Mencuci tangan mencegah penyebaran kuman penyakit."</td>
-                        <td>Kalimat Deklaratif</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Material</strong></td>
-                        <td>"Siapkan air mengalir dan sabun antiseptik."</td>
-                        <td>Verba Material ("Siapkan")</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Langkah</strong></td>
-                        <td>"Gosoklah telapak tangan secara perlahan."</td>
-                        <td>Imperatif & Adverbia Cara</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Penutup</strong></td>
-                        <td>"Kini tangan Anda sudah bersih dan higienis."</td>
-                        <td>Konklusi / Penutup</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 15: Section Title -->
-<div class="slide-container" id="slide15">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Penugasan Terstruktur Kelompok (LKPD 2)</h2>
-        <p>Menganalisis teks prosedur mandiri secara berkelompok di kelas.</p>
-    </div>
-</div>
-
-<!-- Slide 16: Table (LKPD 2 Details) -->
-<div class="slide-container" id="slide16">
-    <h2 class="slide-title">Lembar Kerja Peserta Didik (LKPD 2)</h2>
-    <div class="content-area">
-        <div class="table-layout">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tugas Kelompok</th>
-                        <th>Instruksi Pengerjaan</th>
-                        <th>Target Penilaian</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. Identifikasi Struktur</strong></td>
-                        <td>Temukan bagian Tujuan, Alat/Bahan, dan Langkah dalam teks acuan guru.</td>
-                        <td>Ketepatan pemetaan bagian teks.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. Analisis Kebahasaan</strong></td>
-                        <td>Lingkari 5 kata kerja imperatif dan 3 konjungsi temporal di dalam teks.</td>
-                        <td>Ketepatan identifikasi unsur bahasa.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. Presentasi Singkat</strong></td>
-                        <td>Sampaikan hasil temuan struktur kelompok di depan kelas secara bergantian.</td>
-                        <td>Kepercayaan diri & komunikasi.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 17: Styled Bullet Points (Tips Menganalisis Teks) -->
-<div class="slide-container" id="slide17">
-    <h2 class="slide-title">Tips Cepat Menganalisis Teks Prosedur</h2>
-    <div class="content-area">
-        <div class="bullet-list">
-            <ul>
-                <li><i class="fa-solid fa-circle-check"></i><strong>Cari Judul & Paragraf Pertama:</strong> Pastikan di situlah letak pernyataan tujuan atau goal.</li>
-                <li><i class="fa-solid fa-arrow-right"></i><strong>Perhatikan Akhiran Kata:</strong> Kata kerja imperatif umumnya berakhiran <em>-kan</em>, <em>-i</em>, atau partikel <em>-lah</em>.</li>
-                <li><i class="fa-solid fa-star"></i><strong>Cek Urutan Angka:</strong> Langkah yang runtut selalu menggunakan penomoran atau konjungsi temporal waktu yang jelas.</li>
-                <li><i class="fa-solid fa-thumbtack"></i><strong>Uji Kelogisan:</strong> Bayangkan apakah instruksi tersebut bisa dipraktikkan tanpa ada langkah yang melompat.</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 18: Quote (Refleksi Pembelajaran) -->
-<div class="slide-container" id="slide18">
-    <h2 class="slide-title">Refleksi Pembelajaran Pertemuan 2</h2>
-    <div class="content-area">
-        <div class="quote-layout">
-            <blockquote>"Mengetahui struktur dan kaidah kebahasaan teks prosedur membuat kita tidak hanya pandai membaca, tetapi juga handal menulis instruksi yang akurat."</blockquote>
-            <cite>— Refleksi Elemen Membaca & Memirsa Kelas 9</cite>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 19: Full Background Image (Rangkuman Pertemuan 2) -->
-<div class="slide-container" id="slide19" style="background-image: linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)), url('https://placehold.co/1280x720/1e293b/ffffff?text=Rangkuman+Pertemuan+2'); background-size: cover; background-position: center;">
-    <h2 class="slide-title">Rangkuman Kunci & Persiapan Pertemuan 3</h2>
-    <div class="content-area">
-        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
-            <p>1. <strong>Struktur Teks:</strong> Terdiri dari Tujuan, Material, Langkah-langkah, dan Penutup.</p>
-            <p>2. <strong>Kaidah Bahasa:</strong> Didominasi kalimat imperatif, verba material/tingkah laku, dan konjungsi temporal.</p>
-            <p>3. <strong>Pertemuan Berikutnya:</strong> Kita akan masuk ke Elemen Berbicara & Mempresentasikan melalui praktik wawancara prosedur yang tepat.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 20: Q&A -->
-<div class="slide-container" id="slide20">
-    <div class="qa-layout">
-        <h2>Pertanyaan & Diskusi?</h2>
-        <p>Terima kasih atas partisipasi aktif kalian dalam menelaah struktur dan kaidah bahasa hari ini.</p>
-        <div style="margin-top: 40px; color: #2563eb; font-weight: 700; font-size: 20px;">
-            Kurikulum Merdeka | Bahasa Indonesia Kelas 9
-        </div>
-    </div>
-</div>
 
 </body>
 </html>
