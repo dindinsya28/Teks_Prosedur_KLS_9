@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mempraktikkan Prosedur Wawancara yang Tepat</title>
+    <title>Pertemuan 3: Menelaah Prosedur Wawancara Digital</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -12,29 +12,40 @@
         * { box-sizing: border-box; }
         body {
             background-color: #0f172a;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: 1fr;
-            margin: 0;
-            min-height: 100vh;
-            padding: 20px 0;
-            place-items: center;
-        }
-        .slide-container {
-            align-items: center;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
+            gap: 24px;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 12px;
+            align-items: center;
             font-family: 'Lato', sans-serif;
-            height: 720px;
+            color: #334155;
+        }
+
+        /* Kontainer Fleksibel (Desktop & HP) */
+        .slide-container {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             overflow: hidden;
-            padding: 50px;
+            padding: 28px 18px;
             position: relative;
-            width: 1280px;
+            width: 100%;
+            max-width: 1100px;
+            min-height: auto;
         }
+
+        @media (min-width: 992px) {
+            .slide-container {
+                min-height: 650px;
+                padding: 45px 50px;
+            }
+        }
+
         .slide-container::before {
             content: '';
             height: 100%;
@@ -43,392 +54,336 @@
             top: 0;
             width: 100%;
             z-index: 0;
-            background: radial-gradient(circle at top right, rgba(5, 150, 105, 0.05), transparent 50%);
+            background: radial-gradient(circle at top right, rgba(5, 150, 105, 0.08), transparent 60%);
+            pointer-events: none;
         }
+
         .slide-container > * { position: relative; z-index: 1; width: 100%; }
+
+        /* Tipografi */
+        h1, h2, h3 { color: #0f172a; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
+        p, li { color: #475569; font-size: 15px; line-height: 1.6; margin: 0; }
         
-        /* Typography */
-        h1, h2, h3 { color: #1e293b; font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0; }
-        p, li { color: #475569; font-family: 'Lato', sans-serif; font-size: 18px; line-height: 1.5; margin: 0; }
-        
-        .slide-title { font-size: 38px; font-weight: 700; margin-bottom: 30px; text-align: left; width: 100%; color: #0f172a; border-bottom: 3px solid #059669; padding-bottom: 10px; }
+        @media (min-width: 768px) {
+            p, li { font-size: 17px; }
+        }
+
+        .slide-title {
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: left;
+            color: #0f172a;
+            border-bottom: 3px solid #059669;
+            padding-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .slide-title { font-size: 30px; margin-bottom: 26px; }
+        }
+
         .content-area { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%; }
 
-        /* Layouts */
-        .title-layout { text-align: center; }
-        .title-layout h1 { font-size: 52px; color: #0f172a; margin-bottom: 20px; line-height: 1.2; }
-        .title-layout .subtitle { font-size: 22px; color: #059669; font-weight: 600; max-width: 900px; margin: 0 auto; }
+        /* Judul Slide */
+        .title-layout { text-align: center; padding: 20px 0; }
+        .title-layout h1 { font-size: 26px; color: #0f172a; margin-bottom: 14px; line-height: 1.25; }
+        .title-layout .subtitle { font-size: 15px; color: #059669; font-weight: 600; max-width: 850px; margin: 0 auto; }
+        
+        @media (min-width: 768px) {
+            .title-layout h1 { font-size: 40px; }
+            .title-layout .subtitle { font-size: 20px; }
+        }
 
-        .section-title-layout { text-align: center; }
-        .section-title-layout h2 { font-size: 50px; color: #1e293b; margin-bottom: 15px; }
-        .section-title-layout p { font-size: 20px; color: #64748b; max-width: 800px; margin: 0 auto; }
-        .section-title-layout hr { background-color: #059669; border: none; height: 4px; margin: 25px auto; width: 80px; }
+        /* Layout Kolom Responsif */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            align-items: stretch;
+            width: 100%;
+        }
 
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; width: 100%; }
-        .two-column.tiled > div { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; padding: 30px; }
+        @media (min-width: 768px) {
+            .two-column { grid-template-columns: 1fr 1fr; gap: 26px; }
+        }
 
-        .tiled-content { display: flex; gap: 30px; justify-content: center; width: 100%; }
-        .tile { background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; flex: 1; padding: 25px; text-align: left; }
-        .tile .icon { color: #059669; font-size: 36px; margin-bottom: 15px; }
-        .tile h3 { font-size: 22px; color: #1e293b; margin-bottom: 10px; }
+        .two-column.tiled > div {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+        }
 
-        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
-        .bullet-list li { margin-bottom: 15px; padding-left: 35px; position: relative; }
-        .bullet-list i { color: #059669; font-size: 20px; left: 0; position: absolute; top: 3px; }
+        /* Kartu Tiled */
+        .tiled-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+        }
 
-        /* Table */
-        .table-layout table { border-collapse: collapse; width: 100%; background: #f8fafc; border-radius: 8px; overflow: hidden; }
-        .table-layout th, .table-layout td { border-bottom: 1px solid #e2e8f0; padding: 14px 20px; text-align: left; font-size: 16px; }
-        .table-layout th { background-color: #059669; color: #ffffff; font-family: 'Poppins', sans-serif; }
+        @media (min-width: 768px) {
+            .tiled-content { flex-direction: row; gap: 20px; }
+        }
 
-        /* Timeline */
-        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; align-items: stretch; height: 100%; }
-        .timeline-line { background-color: #e2e8f0; height: 4px; left: 0; position: absolute; top: 50%; transform: translateY(-2px); width: 100%; z-index: 0; }
-        .timeline-item { position: relative; text-align: center; width: 30%; }
-        .timeline-item::after { background-color: #fff; border-radius: 50%; border: 4px solid #059669; content: ''; height: 20px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 20px; z-index: 1; }
-        .timeline-item .content-wrapper { left: 0; position: absolute; width: 100%; padding: 0 10px; }
-        .timeline-item:nth-child(odd) .content-wrapper { bottom: 50%; margin-bottom: 20px; }
-        .timeline-item:nth-child(even) .content-wrapper { margin-top: 20px; top: 50%; }
-        .timeline-item h3 { color: #059669; font-size: 20px; margin-bottom: 8px; }
+        .tile {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 20px;
+            text-align: left;
+        }
 
-        /* Quote & Q&A */
-        .quote-layout { text-align: center; width: 85%; margin: 0 auto; }
-        .quote-layout blockquote { color: #1e293b; font-size: 36px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 20px 0; }
-        .quote-layout cite { color: #059669; font-size: 20px; font-style: normal; font-weight: 700; }
+        .tile .icon { color: #059669; font-size: 28px; margin-bottom: 12px; }
+        .tile h3 { font-size: 18px; color: #1e293b; margin-bottom: 8px; }
 
-        .qa-layout { text-align: center; width: 100%; }
-        .qa-layout h2 { font-size: 64px; color: #1e293b; margin-bottom: 15px; }
-        .qa-layout p { font-size: 22px; color: #64748b; }
+        /* LKPD Mandiri Box */
+        .lkpd-card {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .lkpd-step-badge {
+            display: inline-block;
+            background-color: #059669;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tabel Responsif HP */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin-top: 10px;
+        }
+
+        .table-layout table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #ffffff;
+            min-width: 480px;
+        }
+
+        .table-layout th, .table-layout td {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .table-layout th, .table-layout td { padding: 14px 18px; font-size: 15px; }
+        }
+
+        .table-layout th {
+            background-color: #059669;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background-color: #ecfdf5;
+            border-left: 4px solid #059669;
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 14px;
+        }
+
+        .quote-layout { text-align: center; width: 90%; margin: 0 auto; }
+        .quote-layout blockquote { color: #1e293b; font-size: 20px; font-family: 'Poppins', sans-serif; line-height: 1.4; margin: 0 0 14px 0; }
+        .quote-layout cite { color: #059669; font-size: 15px; font-style: normal; font-weight: 700; }
+
+        @media (min-width: 768px) {
+            .quote-layout blockquote { font-size: 28px; }
+            .quote-layout cite { font-size: 17px; }
+        }
+
+        .nav-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: #059669;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: background-color 0.2s ease;
+        }
+        .nav-home-btn:hover { background-color: #047857; }
     </style>
 </head>
 <body>
 
-<!-- Slide 1: Title Slide -->
+<!-- Slide 1: Judul Pertemuan 3 -->
 <div class="slide-container" id="slide1">
     <div class="title-layout">
-        <h1>Mempraktikkan Prosedur Wawancara<br>yang Tepat</h1>
-        <p class="subtitle">Pertemuan 3: Elemen Berbicara & Mempresentasikan | Kurikulum Merdeka Bahasa Indonesia</p>
+        <h1>Menelaah Prosedur Wawancara dari Sumber Internet</h1>
+        <p class="subtitle">Pertemuan 3: Elemen Menyimak &amp; Berbicara | Bahasa Indonesia Kelas IX</p>
     </div>
 </div>
 
-<!-- Slide 2: Section Title -->
+<!-- Slide 2: Capaian & Tujuan Pembelajaran -->
 <div class="slide-container" id="slide2">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Pengantar & Fokus Pembelajaran</h2>
-        <p>Menguasai tata cara komunikasi lisan yang sistematis melalui praktik wawancara profesional.</p>
+    <h2 class="slide-title">Alur &amp; Target KBM Hari Ini (3x35 Menit)</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3><i class="fa-solid fa-clock" style="color:#059669; margin-right:8px;"></i> Manajemen Waktu KBM</h3>
+                <p>• <strong>35 Menit I:</strong> Penjelasan konsep tahapan wawancara, etika bertanya, dan kata serapan.<br>
+                • <strong>35 Menit II:</strong> Penelusuran mandiri 1 contoh wawancara di internet melalui gawai.<br>
+                • <strong>35 Menit III:</strong> Pengisian lembar analisis dan refleksi kelas.</p>
+            </div>
+            <div>
+                <h3><i class="fa-solid fa-bullseye" style="color:#059669; margin-right:8px;"></i> Target Hasil Siswa</h3>
+                <p>Setiap siswa mampu menemukan 1 wawancara di internet, membedah kualitas pertanyaan pewawancara, serta mengidentifikasi kata serapan yang diucapkan narasumber.</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Slide 3: Two Column Tiled Text (Tujuan Pembelajaran) -->
+<!-- Slide 3: 3 Tahapan Prosedur Wawancara -->
 <div class="slide-container" id="slide3">
-    <h2 class="slide-title">Capaian & Tujuan Pembelajaran 3</h2>
+    <h2 class="slide-title">3 Tahap Utama Prosedur Wawancara</h2>
     <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Capaian Elemen Berbicara</h3>
-                <p>Peserta didik mampu menyajikan gagasan, pikiran, dan pandangan secara lisan melalui wawancara yang runtut, santun, serta menggunakan kaidah bahasa lugas dan efektif.</p>
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-clipboard-question"></i></div>
+                <h3>1. Pra-Wawancara</h3>
+                <p>Menentukan topik, meriset latar belakang narasumber, meminta izin, dan menyusun panduan pertanyaan terarah.</p>
             </div>
-            <div>
-                <h3>Tujuan Spesifik Pertemuan 3</h3>
-                <p>1. Memahami 3 tahapan prosedur wawancara.<br>2. Menyusun daftar pertanyaan 5W+1H yang tidak mendikte.<br>3. Mempraktikkan simulasi wawancara berpasangan di kelas.</p>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-comments"></i></div>
+                <h3>2. Pelaksanaan</h3>
+                <p>Membuka dengan salam santun, menyimak tanpa memotong, mengajukan pertanyaan terbuka, serta mencatat poin utama.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                <h3>3. Pasca-Wawancara</h3>
+                <p>Mengucapkan apresiasi, merapikan catatan/transkrip rekaman, dan menyimpulkan informasi penting secara objektif.</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Slide 4: Two Column Tiled Text (Hakikat Wawancara) -->
+<!-- Slide 4: Teknik Membedah Pertanyaan Terbuka vs Mendikte -->
 <div class="slide-container" id="slide4">
-    <h2 class="slide-title">Hakikat Wawancara sebagai Prosedur Lisan</h2>
+    <h2 class="slide-title">Fokus Analisis: Terbuka vs. Mendikte</h2>
     <div class="content-area">
         <div class="two-column tiled">
             <div>
-                <h3>Komunikasi Terarah</h3>
-                <p>Wawancara bukan sekadar mengobrol, melainkan kegiatan tanya jawab terstruktur untuk menggali informasi spesifik dari narasumber ahli secara akurat.</p>
+                <h3>Pertanyaan Terbuka (Ideal)</h3>
+                <p>Memberi ruang narasumber menjelaskan secara runtut dan mendalam.<br><br>
+                <em>Ciri: Menggunakan kata tanya "Bagaimana" atau "Mengapa". Narasumber leluasa bercerita.</em></p>
             </div>
             <div>
-                <h3>Pematuhan Etika</h3>
-                <p>Keberhasilan wawancara sangat ditentukan oleh kesantunan bertutur, teknik mendengarkan aktif, dan objektivitas pewawancara.</p>
+                <h3>Pertanyaan Mendikte (Kurang Tepat)</h3>
+                <p>Mengarahkan jawaban sesuai asumsi sepihak si penanya.<br><br>
+                <em>Ciri: Nada menghakimi atau menyudutkan ("Bukankah Anda sengaja...?", "Tidakkah menurut Anda ini salah?").</em></p>
             </div>
+        </div>
+        <div class="highlight-box">
+            <strong>Tugas Kalian Saat Berselancar:</strong> Amati apakah jurnalis/pewawancara di internet yang kalian temukan sudah adil dan terbuka dalam mengajukan pertanyaan.
         </div>
     </div>
 </div>
 
-<!-- Slide 5: Section Title -->
+<!-- Slide 5: Kebahasaan Serapan & Akhiran -wan -->
 <div class="slide-container" id="slide5">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Tahapan Prosedur Wawancara</h2>
-        <p>Tiga fase krusial dalam siklus pelaksanaan wawancara profesional.</p>
+    <h2 class="slide-title">Kaidah Bahasa: Kosakata Serapan</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>Kata Serapan dalam Dialog Formal</h3>
+                <p>Narasumber sering menggunakan kata serapan yang lazim dalam komunikasi publik:<br>
+                • <strong>Karier</strong> (Belanda: <em>carrière</em>)<br>
+                • <strong>Fasilitas</strong> (Belanda: <em>faciliteit</em>)<br>
+                • <strong>Inovasi</strong> (Inggris: <em>innovation</em>)<br>
+                • <strong>Aktivitas</strong> (Belanda: <em>activiteit</em>)</p>
+            </div>
+            <div>
+                <h3>Imbuhan Akhiran -wan (Sanskerta)</h3>
+                <p>Menandai pelaku profesi atau keahlian tertentu:<br>
+                • <strong>Wartawan:</strong> Orang yang bertugas mencari dan menyusun berita.<br>
+                • <strong>Ilmuwan:</strong> Ahli di bidang ilmu pengetahuan.<br>
+                • <strong>Relawan:</strong> Orang yang bekerja sukarela.</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Slide 6: Timeline (3 Tahap Utama Wawancara) -->
+<!-- Slide 6: LKPD Mandiri Berbasis Internet (Praktis di Kelas) -->
 <div class="slide-container" id="slide6">
-    <h2 class="slide-title">3 Tahapan Siklus Wawancara</h2>
+    <h2 class="slide-title">LKPD Mandiri: Eksplorasi Wawancara di Internet</h2>
     <div class="content-area">
-        <div class="timeline-layout" style="justify-content: space-around;">
-            <div class="timeline-line"></div>
-            <div class="timeline-item" style="width: 28%;">
-                <div class="content-wrapper">
-                    <h3>1. Pra-Wawancara</h3>
-                    <p>Menentukan narasumber, perizinan, & menyusun daftar pertanyaan 5W+1H.</p>
-                </div>
-            </div>
-            <div class="timeline-item" style="width: 28%;">
-                <div class="content-wrapper">
-                    <h3>2. Pelaksanaan</h3>
-                    <p>Menerapkan etika, teknik bertanya terbuka, serta mencatat/merekam.</p>
-                </div>
-            </div>
-            <div class="timeline-item" style="width: 28%;">
-                <div class="content-wrapper">
-                    <h3>3. Pasca-Wawancara</h3>
-                    <p>Menyusun transkrip, validasi data, & penyusunan laporan akhir.</p>
+        <div class="lkpd-card">
+            <span class="lkpd-step-badge"><i class="fa-solid fa-globe"></i> Tugas Digital di Kelas (40 Menit)</span>
+            <p style="margin-bottom: 12px;">Buka YouTube, portal berita, atau media sosial edukatif di HP-mu. Cari <strong>1 video atau teks wawancara singkat</strong> (misal: jurnalis mewawancarai atlet, penulis, guru, atau pejabat publik). Salin dan isi tabel ini di buku tugasmu:</p>
+            
+            <div class="table-responsive">
+                <div class="table-layout">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;">Aspek Pengamatan</th>
+                                <th>Hasil Temuan Mandiri Siswa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Judul &amp; Sumber Link</strong></td>
+                                <td><em>(Tulis judul video/artikel dan nama platformnya, misal: YouTube Kompas TV / Detik)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tokoh Narasumber</strong></td>
+                                <td><em>(Nama tokoh dan keahlian/profesinya)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 Pertanyaan Terbuka yang Muncul</strong></td>
+                                <td><em>(Tulis 1 contoh pertanyaan pewawancara yang menggunakan kata 'Bagaimana' atau 'Mengapa')</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Evaluasi Sikap Pewawancara</strong></td>
+                                <td><em>(Apakah pewawancara santun dan mendengarkan aktif? Jelaskan alasannya secara singkat)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kata Serapan yang Ditemukan</strong></td>
+                                <td><em>(Tulis minimal 2 kata serapan yang kamu dengar atau baca dari dialog tersebut)</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Slide 7: Tiled Text with Icons (Tahap Pra-Wawancara) -->
+<!-- Slide 7: Refleksi dan Penutup -->
 <div class="slide-container" id="slide7">
-    <h2 class="slide-title">Tahap 1: Pra-Wawancara (Persiapan)</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-user-tie"></i></div>
-                <h3>Pemilihan Narasumber</h3>
-                <p>Pilih narasumber yang kredibel, menguasai bidang keahlian yang relevan dengan topik wawancara Anda.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-calendar-check"></i></div>
-                <h3>Perizinan & Janji Temu</h3>
-                <p>Hubungi narasumber secara sopan jauh-jauh hari untuk meminta kesediaan waktu wawancara.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-list-check"></i></div>
-                <h3>Penyusunan Pedoman</h3>
-                <p>Buat daftar pertanyaan terstruktur menggunakan formula 5W+1H agar arah informasi tidak melebar.</p>
-            </div>
-        </div>
+    <div class="quote-layout">
+        <blockquote>"Internet adalah jendela informasi. Dengan kemampuan mengamati secara kritis, kita bisa belajar cara berkomunikasi yang cerdas dari siapa saja di seluruh dunia."</blockquote>
+        <cite>— Refleksi Pembelajaran Bahasa Indonesia Kelas IX</cite>
     </div>
-</div>
-
-<!-- Slide 8: Two Column (Formula 5W+1H dalam Pertanyaan) -->
-<div class="slide-container" id="slide8">
-    <h2 class="slide-title">Penyusunan Pertanyaan Formula 5W+1H</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Pertanyaan Pokok (Faktual)</h3>
-                <p><strong>Apa, Siapa, Kapan, Di mana:</strong><br>Digunakan untuk menggali data dasar, identitas masalah, waktu kejadian, dan fakta objektif dari narasumber.</p>
-            </div>
-            <div>
-                <h3>Pertanyaan Mendalam (Analitis)</h3>
-                <p><strong>Mengapa & Bagaimana:</strong><br>Digunakan untuk menggali alasan logis, proses kerja, tips, atau solusi teknis dari sebuah permasalahan.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 9: Section Title -->
-<div class="slide-container" id="slide9">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Pelaksanaan Wawancara & Etika</h2>
-        <p>Menjaga kesantunan bertutur dan teknik komunikasi verbal yang efektif.</p>
-    </div>
-</div>
-
-<!-- Slide 10: Tiled Text with Icons (Etika Pelaksanaan) -->
-<div class="slide-container" id="slide10">
-    <h2 class="slide-title">Etika & Kesantunan Saat Berwawancara</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-handshake"></i></div>
-                <h3>Sikap & Penampilan</h3>
-                <p>Datang tepat waktu, berpakaian rapi, bersikap ramah, dan ucapkan salam pembuka dengan hangat.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-ear-listen"></i></div>
-                <h3>Menyimak Aktif</h3>
-                <p>Dengarkan penjelasan narasumber secara saksama tanpa memotong pembicaraan di tengah jalan.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-face-smile"></i></div>
-                <h3>Bahasa Tubuh Positif</h3>
-                <p>Tunjukkan kontak mata yang baik dan anggukan kepala sebagai tanda menghargai jawaban narasumber.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 11: Two Column (Pertanyaan Terbuka vs Menandikte) -->
-<div class="slide-container" id="slide11">
-    <h2 class="slide-title">Teknik Bertanya: Terbuka vs Mendikte</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Pertanyaan Terbuka (Dianjurkan)</h3>
-                <p>Memancing narasumber bercerita luas dan objektif.<br><em>Contoh: "Bagaimana tahapan awal merawat tanaman obat ini?"</em></p>
-            </div>
-            <div>
-                <h3>Pertanyaan Mendikte (Dihindari)</h3>
-                <p>Mengarahkan jawaban sesuai keinginan pewawancara (bias).<br><em>Contoh: "Bukankah tanaman ini harus disiram air garam setiap hari?"</em></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 12: Tiled Text with Icons (Pencatatan & Perekaman) -->
-<div class="slide-container" id="slide12">
-    <h2 class="slide-title">Teknik Mencatat & Merekam Data</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-microphone-lines"></i></div>
-                <h3>Perekaman Suara</h3>
-                <p>Gunakan gawai atau alat perekam digital (dengan izin narasumber) untuk menghindari informasi yang terlewat.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                <h3>Catatan Poin Kunci</h3>
-                <p>Tetap tulis poin-poin penting di buku catatan sebagai cadangan pengaman jika rekaman bermasalah.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
-                <h3>Konfirmasi Ulang</h3>
-                <p>Tanyakan kembali jika ada istilah atau data angka yang kurang jelas saat narasumber berbicara.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 13: Section Title -->
-<div class="slide-container" id="slide13">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Pasca-Wawancara & Penyusunan Transkrip</h2>
-        <p>Mengolah hasil rekaman lisan menjadi dokumen tertulis yang sistematis.</p>
-    </div>
-</div>
-
-<!-- Slide 14: Two Column (Penyusunan Transkrip) -->
-<div class="slide-container" id="slide14">
-    <h2 class="slide-title">Langkah Penyusunan Transkrip Wawancara</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>1. Penulisan Ulang (Verbatim)</h3>
-                <p>Mendengarkan kembali rekaman dan mengetik ulang seluruh percakapan secara jujur tanpa mengubah substansi informasi asli dari narasumber.</p>
-            </div>
-            <div>
-                <h3>2. Penyuntingan Bahasa</h3>
-                <p>Membersihkan kata-kata pengisi (seperti "ehm", "anu") dan merapikan struktur kalimat lisan agar menjadi teks tertulis yang lugas dan enak dibaca.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 15: Section Title -->
-<div class="slide-container" id="slide15">
-    <div class="section-title-layout">
-        <hr>
-        <h2>Aktivitas & Simulasi Wawancara Kelas</h2>
-        <p>Praktek langsung berpasangan memerankan pewawancara dan narasumber ahli.</p>
-    </div>
-</div>
-
-<!-- Slide 16: Two Column (Ilustrasi Studi Kasus Simulasi) -->
-<div class="slide-container" id="slide16">
-    <h2 class="slide-title">Ilustrasi Studi Kasus Simulasi Kelas</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>Tema A: Tanaman Obat Keluarga (TOGA)</h3>
-                <p>Siswa berperan sebagai ahli herbal atau petani lokal yang menjelaskan cara menanam dan meracik jahe merah serta daun sirih untuk kesehatan.</p>
-            </div>
-            <div>
-                <h3>Tema B: Pengelolaan Keuangan Rumah Tangga</h3>
-                <p>Siswa berperan sebagai perencana keuangan yang membagikan tips praktis mengatur anggaran bulanan keluarga secara bijak.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 17: Table (Rubrik Penilaian Wawancara) -->
-<div class="slide-container" id="slide17">
-    <h2 class="slide-title">Rubrik Penilaian Praktik Wawancara</h2>
-    <div class="content-area">
-        <div class="table-layout">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Aspek Penilaian</th>
-                        <th>Indikator Keberhasilan</th>
-                        <th>Bobot Nilai</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Ketepatan Prosedur</strong></td>
-                        <td>Melakukan tahapan pra, pelaksanaan, hingga pencatatan secara runtut.</td>
-                        <td>25%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kesantunan Bertutur</strong></td>
-                        <td>Menggunakan bahasa santun, intonasi ramah, dan menghargai narasumber.</td>
-                        <td>25%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kualitas Pertanyaan</strong></td>
-                        <td>Menggunakan formula 5W+1H dan pertanyaan terbuka (tidak mendikte).</td>
-                        <td>30%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hasil Transkrip</strong></td>
-                        <td>Menyusun laporan atau transkrip ringkas hasil wawancara dengan akurat.</td>
-                        <td>20%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 18: Quote (Refleksi Pembelajaran) -->
-<div class="slide-container" id="slide18">
-    <h2 class="slide-title">Refleksi Pembelajaran Pertemuan 3</h2>
-    <div class="content-area">
-        <div class="quote-layout">
-            <blockquote>"Keterampilan berbicara yang baik lahir dari kesiapan menyimak, kesantunan etika, dan ketajaman merumuskan pertanyaan bermutu."</blockquote>
-            <cite>— Refleksi Elemen Berbicara Kelas 9</cite>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 19: Full Background Image (Rangkuman Pertemuan 3) -->
-<div class="slide-container" id="slide19" style="background-image: linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)), url('https://placehold.co/1280x720/1e293b/ffffff?text=Rangkuman+Pertemuan+3'); background-size: cover; background-position: center;">
-    <h2 class="slide-title">Rangkuman Kunci & Persiapan Pertemuan 4</h2>
-    <div class="content-area">
-        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
-            <p>1. <strong>Prosedur Wawancara:</strong> Melibatkan 3 tahap penting yaitu pra-wawancara, pelaksanaan, dan pasca-wawancara.</p>
-            <p>2. <strong>Etika & Teknik:</strong> Menggunakan pertanyaan terbuka 5W+1H yang santun dan menghindari dikte terhadap narasumber.</p>
-            <p>3. <strong>Pertemuan Berikutnya:</strong> Masuk ke Elemen Menulis (Bagian 1) untuk merancang poster prosedur dan esai eksposatif.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 20: Q&A -->
-<div class="slide-container" id="slide20">
-    <div class="qa-layout">
-        <h2>Pertanyaan & Simulasi Selesai!</h2>
-        <p>Terima kasih atas antusiasme luar biasa kalian dalam praktik wawancara profesional hari ini.</p>
-        <div style="margin-top: 40px; color: #059669; font-weight: 700; font-size: 20px;">
-            Kurikulum Merdeka | Bahasa Indonesia Kelas 9
-        </div>
+    <div style="text-align: center; margin-top: 25px;">
+        <a href="index.html" class="nav-home-btn"><i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Utama</a>
     </div>
 </div>
 
